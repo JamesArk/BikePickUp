@@ -1,0 +1,134 @@
+Bicicleta parada.
+
+Nao se registaram atrasos.
+
+Não foram efetuados pickups.
+
+Parque existente.
+
+Bicicleta estacionada no parque.
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 1
+
+Bicicleta inexistente.
+
+Bicicleta estacionada no parque.
+
+Bicicleta removida com sucesso.
+
+Bicicleta inexistente.
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 0
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 5, 0
+
+Bicicleta adicionada com sucesso.
+
+Bicicleta parada.
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 5 euros, 0 pontos
+
+Bicicleta inexistente.
+
+Bicicleta parada.
+
+Utilizador inexistente.
+
+PickUp com sucesso.
+
+Bicicleta ja foi utilizada.
+
+Dados invalidos.
+
+Pickdown com sucesso: 5 euros, 0 pontos
+
+Nao se registaram atrasos.
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 2
+
+Bicicleta ja foi utilizada.
+
+Bicicleta inexistente.
+
+Utilizador inexistente.
+
+u1 p1 p1 37 0 0
+u1 p1 p1 60 0 0
+
+b1 p1 p1 37 0 0
+b1 p1 p1 60 0 0
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 5, 0
+
+Utilizador inexistente.
+
+Dados invalidos.
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 5, 0
+
+Utilizador inexistente.
+
+PickUp com sucesso.
+
+Bicicleta em movimento.
+
+Bicicleta nao esta em parque.
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 0
+
+Parque inexistente.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Bicicleta estacionada no parque.
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 4, 1
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 1
+
+Saldo insuficiente.
+
+Saldo: 9 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 9 euros, 1 pontos
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 6 euros, 4 pontos
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 3 euros, 7 pontos
+
+Saldo insuficiente.
+
+u1 p1 p1 37 0 0
+u1 p1 p1 60 0 0
+u1 p1 p1 61 1 1
+u1 p1 p1 20 0 0
+u1 p1 p1 123 63 3
+u1 p1 p1 140 80 3
+
+b1 p1 p1 37 0 0
+b1 p1 p1 60 0 0
+b1 p1 p1 61 1 1
+b1 p1 p1 20 0 0
+b1 p1 p1 123 63 3
+b1 p1 p1 140 80 3
+
+Bicicleta estacionada no parque.
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 1
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 3, 7
+
+joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212900000, 3, 7
+
+Biclas da costa: rua das acacias 15, COSTA DE CAPARICA, 6
+
+Gravando e terminando...
+

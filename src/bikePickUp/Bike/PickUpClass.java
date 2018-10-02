@@ -2,11 +2,20 @@ package bikePickUp.Bike;
 
 public class PickUpClass implements PickUp{
 
-    private String idUser,initialIDPark,finalIDPark;
-    private int duration;
-    private int cost;
-
-    public PickUpClass(String idUser){
-        this.idUser = idUser;
+    private String idBike,idUser;
+    
+    public PickUpClass(String idBike,String idUser){
+    	this.idBike = idBike;
+    	this.idUser = idUser;
     }
+
+	@Override
+	public String getBikeID() {
+		return idBike;
+	}
+
+	@Override
+	public String getUserID() {
+		return idUser;
+	}
 }

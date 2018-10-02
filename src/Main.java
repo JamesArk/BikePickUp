@@ -1,8 +1,14 @@
 import bikePickUp.BikePickUp;
 import bikePickUp.BikePickUpClass;
+import bikePickUp.Exceptions.BikeAlreadyExistsException;
+import bikePickUp.Exceptions.BikeNotFoundException;
+import bikePickUp.Exceptions.ParkAlreadyExistsException;
+import bikePickUp.Exceptions.ParkNotFoundException;
+import bikePickUp.Exceptions.UsedBikeException;
 import bikePickUp.Exceptions.UserAlreadyExistsException;
 import bikePickUp.Exceptions.UserNotFoundException;
 import bikePickUp.User.User;
+import bikePickUp.dataStructures.Queue;
 
 import java.util.Iterator;
 import java.util.Scanner;
@@ -74,20 +80,25 @@ public class Main {
         while(!command.equals(Command.XS)) {
             switch (command) {
                 case AddUser:
-                    AddUserCommand(in,bpu);
+                    addUserCommand(in,bpu);
                     break;
                 case RemoveUser:
-                    RemoveUser(in,bpu);
+                    removeUser(in,bpu);
                     break;
                 case GetUserInfo:
+                	getUserInfo(in,bpu);
                     break;
                 case AddPark:
+                	addPark(in,bpu);
                     break;
                 case AddBike:
+                	addBike(in,bpu);
                     break;
                 case RemoveBike:
+                	removeBike(in,bpu);
                     break;
                 case GetParkInfo:
+                	getParkInfo(in, bpu);
                     break;
                 case PickUp:
                     break;
@@ -106,6 +117,7 @@ public class Main {
                 case FavoriteParks:
                     break;
                 case XS:
+                	System.out.println(Message.EXIT.msg);
                     break;
                 case UNKNOWN:
                     break;
@@ -125,7 +137,7 @@ public class Main {
         }
     }
 
-    private static void AddUserCommand(Scanner in, BikePickUp bpu) {
+    private static void addUserCommand(Scanner in, BikePickUp bpu) {
         String userID = in.next().trim();
         String NIF = in.next().trim();
         String email = in.next().trim();
@@ -141,7 +153,7 @@ public class Main {
         }
     }
 
-    private static void RemoveUser(Scanner in, BikePickUp bpu) {
+    private static void removeUser(Scanner in, BikePickUp bpu) {
         String idUser = in.nextLine().trim();
         try {
             bpu.removeUser(idUser);
@@ -153,9 +165,72 @@ public class Main {
 
     private static void getUserInfo(Scanner in,BikePickUp bpu) {
         String userID = in.nextLine().trim();
+        String msg = "";
         try {
-
-        }
+        	Queue<String> userInfo = bpu.getUserInfo(userID);
+        	msg += userInfo.dequeue() + ":";
+        	while(!userInfo.isEmpty()) {
+        		msg += userInfo.dequeue() + ", ";
+        	}
+        	System.out.println(msg.substring(0, msg.length()-2));
+        } catch(UserNotFoundException e) {
+        	System.out.println(Message.USER_NOT_FOUND.msg);
+        }  
+    }
+    
+    private static void addPark(Scanner in, BikePickUp bpu) {
+    	String idPark = in.next().trim();
+    	String name = in.nextLine().trim();
+    	String address = in.nextLine();
+    	try {
+    		bpu.addPark(idPark,name,address);
+    		System.out.println(Message.ADD_PARK_SUCESS.msg);
+    	} catch(ParkAlreadyExistsException e) {
+    		System.out.println(Message.PARK_ALREADY_EXISTS.msg);
+    	}
+    }
+    
+    private static void addBike(Scanner in,BikePickUp bpu) {
+    	String bikeID = in.next().trim();
+    	String parkID = in.next().trim();
+    	String bikeLicense = in.nextLine().trim();
+    	
+    	try {
+    		bpu.addBike(bikeID,parkID,bikeLicense);
+    		System.out.println(Message.ADD_BIKE_SUCESS.msg);
+    	} catch(BikeAlreadyExistsException e) {
+    		System.out.println(Message.BIKE_ALREADY_EXISTS.msg);
+    	} catch(ParkNotFoundException e) {
+    		System.out.println(Message.PARK_NOT_FOUND.msg);
+    	}
+    }
+    
+    private static void removeBike(Scanner in,BikePickUp bpu) {
+    	String bikeID = in.nextLine().trim();
+    	
+    	try {
+    		bpu.removeBike(bikeID);
+    		System.out.println(Message.REMOVE_BIKE_SUCESS.msg);
+    	} catch(BikeNotFoundException e) {
+    		System.out.println(Message.BIKE_NOT_FOUND.msg);
+    	} catch(UsedBikeException e) {
+    		System.out.println(Message.USED_BIKE.msg);
+    	}
+    }
+    
+    private static void getParkInfo(Scanner in,BikePickUp bpu) {
+    	String parkID = in.nextLine().trim();
+    	String msg = "";
+    	try {
+    		Queue<String> parkInfo = bpu.getParkInfo(parkID);
+    		msg += parkInfo.dequeue() + ": ";
+    		while(!parkInfo.isEmpty()) {
+    			msg+= parkInfo.dequeue() + ", ";
+    		}
+    		System.out.println(msg.substring(0, msg.length()-2));
+    	} catch(ParkNotFoundException e) {
+    		System.out.println(Message.PARK_NOT_FOUND.msg);
+    	}
     }
 
 
