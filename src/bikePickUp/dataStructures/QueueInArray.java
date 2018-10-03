@@ -125,7 +125,6 @@ public class QueueInArray<E> implements Queue<E>
         front = this.nextIndex(front);     
         currentSize--;          
         return element;            
-    }                                                                
-
+    }
 
 }

@@ -38,5 +38,4 @@ public interface Queue<E> extends Serializable
      * @throws EmptyQueueException - if size() = 0
      */
     E dequeue( ) throws EmptyQueueException;
-
 }                                                                       

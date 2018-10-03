@@ -1,8 +1,7 @@
 package bikePickUp.Park;
 
 import bikePickUp.Bike.Bike;
-import bikePickUp.dataStructures.Queue;
-import bikePickUp.dataStructures.QueueInArray;
+import bikePickUp.dataStructures.*;
 
 public class ParkClass implements Park {
 
@@ -24,12 +23,12 @@ public class ParkClass implements Park {
 	}
 
 	@Override
-	public Queue<String> getParkInfo() {
-		Queue<String> parkInfo = new QueueInArray<>();
-		parkInfo.enqueue(name);
-		parkInfo.enqueue(address);
-		parkInfo.enqueue(Integer.toString(nBikes));
-		return parkInfo;
+	public Iterator<String> getParkInfo() {
+		List<String> list = new DoublyLinkedList<>();
+		list.addLast(name);
+		list.addLast(address);
+		list.addLast(Integer.toString(nBikes));
+		return list.iterator();
 	}
 
 	@Override

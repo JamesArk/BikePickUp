@@ -1,13 +1,13 @@
 package bikePickUp.Park;
 
 import bikePickUp.Bike.Bike;
-import bikePickUp.dataStructures.Queue;
+import bikePickUp.dataStructures.Iterator;
 
 public interface Park {
 
 	String getID();
 	
-	Queue<String> getParkInfo();
+	Iterator<String> getParkInfo();
 	
 	void addBike(Bike b);
 }

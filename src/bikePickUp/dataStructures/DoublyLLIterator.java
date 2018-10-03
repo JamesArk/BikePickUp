@@ -51,8 +51,7 @@ class DoublyLLIterator<E> implements TwoWayIterator<E>
 
 
     @Override
-    public void rewind( )
-    {
+    public void rewind( ) {
         nextToReturn = firstNode;
         prevToReturn = null;
     }
