@@ -52,6 +52,19 @@ public class Main {
         }
 
     }
+    
+    private enum Formatter {
+    	
+    	USER_INFO_FORMATTER_1("%s; "),
+    	USER_PARK_INFO_FORMATTER_2("%s, "),
+    	PARK_INFO_FORMATTER_1("%s: "),
+    	PARK_INFO_FORMATTER_2("%s, ");
+    	
+    	private final String formatter;
+    	Formatter(String formatter){
+    		this.formatter = formatter;
+    	}
+    }
 
     private enum Command{
         AddUser,RemoveUser,GetUserInfo,AddPark,
@@ -68,8 +81,9 @@ public class Main {
     }
 
     private static void initializeProgramme(Scanner in, BikePickUpClass bpu) {
-        Command command = getCommand(in);
-        while(!command.equals(Command.XS)) {
+        Command command;
+        do {
+        	command = getCommand(in);
             switch (command) {
                 case AddUser:
                     addUserCommand(in,bpu);
@@ -113,13 +127,13 @@ public class Main {
                     break;
                 case XS:
                 	System.out.println(Message.EXIT.msg);
+                	in.close();
                     break;
                 case UNKNOWN:
                     break;
             }
             System.out.println("\n");
-            command = getCommand(in);
-        }
+        } while(!command.equals(Command.XS));
     }
 
     private static Command getCommand(Scanner in) {
@@ -166,9 +180,9 @@ public class Main {
         try {
         	Iterator<String> userInfo = bpu.getUserInfo(userID);
         	if(userInfo.hasNext())
-        	    msg += userInfo.next() + "; ";
+        	    msg += String.format(Formatter.USER_INFO_FORMATTER_1.formatter, userInfo.next());
         	while(userInfo.hasNext())
-        	    msg += userInfo.next() + ", ";
+        	    msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, userInfo.next());
 
         	System.out.println(msg.substring(0, msg.length()-2));
         } catch(UserNotFoundException e) {
@@ -223,9 +237,9 @@ public class Main {
     	try {
     		Iterator<String> parkInfo = bpu.getParkInfo(parkID);
     		if(parkInfo.hasNext())
-    		    msg += parkInfo.next() + ": ";
+    		    msg += String.format(Formatter.PARK_INFO_FORMATTER_1.formatter, parkInfo.next());
     		while(parkInfo.hasNext()) {
-    			msg += parkInfo.next() + ", ";
+    			msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, parkInfo.next());
     		}
     		System.out.println(msg.substring(0, msg.length()-2));
     	} catch(ParkNotFoundException e) {
