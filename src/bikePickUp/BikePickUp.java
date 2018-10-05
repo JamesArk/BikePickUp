@@ -1,5 +1,6 @@
 package bikePickUp;
 
+import bikePickUp.Bike.PickUp;
 import bikePickUp.Exceptions.*;
 import bikePickUp.dataStructures.Iterator;
 
@@ -26,4 +27,14 @@ public interface BikePickUp {
 	void pickDown(String idBike,String idPark, int minutes) throws BikeNotFoundException, BikeStoppedException,ParkNotFoundException,InvalidDataException;
 
     void chargeUser(String idUser, int value) throws  UserNotFoundException,InvalidDataException;
+
+	Iterator<PickUp> getBikePickUps(String idBike) throws BikeNotFoundException, BikeNotUsedException, BikeOnFirstPickUpException;
+
+	Iterator<PickUp> getUserPickUps(String idUser) throws UserNotFoundException,UserNotUsedSystemException,UserOnFirstPickUpException;
+
+	int getUserBalance();
+
+	int getUserPoints();
+
+	void isBikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException;
 }

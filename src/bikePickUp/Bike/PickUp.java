@@ -3,6 +3,9 @@ package bikePickUp.Bike;
 public interface PickUp {
 
     int MAX_MINS = 60;
+    
+    int MINS_LATE = 30;
+    
 	String getBikeID();
 	
 	String getUserID();
@@ -16,4 +19,10 @@ public interface PickUp {
 	String getFinalParkID();
 
 	int minutesLate();
+
+	String getInitialIDPark();
+	
+	void setCost();
+
+	int getCost();
 }

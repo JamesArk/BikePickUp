@@ -36,4 +36,20 @@ public class ParkClass implements Park {
 		this.bike = b;
 		nBikes++;
 	}
+
+	@Override
+	public void pickUp() {
+		bike = null;
+	}
+
+	@Override
+	public void pickDown(Bike bike) {
+		this.bike = bike;
+		
+	}
+
+	@Override
+	public boolean isBikeInPark() {
+		return bike != null;
+	}
 }

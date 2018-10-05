@@ -45,4 +45,27 @@ public class PickUpClass implements PickUp{
     public int minutesLate() {
         return minutes - MAX_MINS;
     }
+
+	@Override
+	public String getInitialIDPark() {
+		return initialParkID;
+	}
+	
+	@Override
+	public void setCost() {
+		int i = 1;
+		if(this.minutesLate() <= 0) 
+			cost = 0;
+		else {
+			while(this.minutesLate() > MINS_LATE * i) {
+				i++;
+			}
+			cost = i;
+		}
+	}
+
+	@Override
+	public int getCost() {
+		return cost;
+	}
 }

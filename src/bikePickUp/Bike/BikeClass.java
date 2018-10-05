@@ -1,18 +1,21 @@
 package bikePickUp.Bike;
 
 import bikePickUp.dataStructures.DoublyLinkedList;
+import bikePickUp.dataStructures.Iterator;
 import bikePickUp.dataStructures.List;
 
 public class BikeClass implements Bike {
 
     private String id, parkID,bikeLicense;
     private List<PickUp> pickUps;
+    private boolean isOnTheMove;
 
     public BikeClass(String id, String parkID, String bikeLicense) {
         this.id = id;
         this.parkID = parkID;
         this.bikeLicense = bikeLicense;
         this.pickUps = new DoublyLinkedList<>();
+        isOnTheMove = false;
     }
 
 	@Override
@@ -23,6 +26,7 @@ public class BikeClass implements Bike {
     @Override
     public void pickUp(PickUp pickUp) {
         pickUps.addLast(pickUp);
+        isOnTheMove = true;
     }
 
     @Override
@@ -40,5 +44,22 @@ public class BikeClass implements Bike {
         PickUp pickUp = pickUps.getLast();
         pickUp.setFinalParkID(finalParkID);
         pickUp.setMinutes(minutes);
+        pickUp.setCost();
+        isOnTheMove = false;
     }
+
+	@Override
+	public boolean getMoveSituation() {
+		return isOnTheMove;
+	}
+
+	@Override
+	public Iterator<PickUp> getBikePickUps() {
+		return pickUps.iterator();
+	}
+
+	@Override
+	public String getBikeLicense() {
+		return bikeLicense;
+	}
 }

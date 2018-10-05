@@ -6,7 +6,9 @@ import bikePickUp.dataStructures.Iterator;
 
 
 public interface User {
-    String getID();
+    
+	String getID();
+	
     Iterator<String> getUserInfo();
 
     int getBalance();
@@ -18,4 +20,10 @@ public interface User {
     void pickDown(String finalParkID, int minutes);
 
     void charge(int value);
+    
+    boolean getMoveSituation();
+    
+	Iterator<PickUp> getUserPickUps();
+	
+	int getPoints();
 }

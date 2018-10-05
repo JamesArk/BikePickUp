@@ -15,15 +15,12 @@ public class BikePickUpClass implements BikePickUp {
     private Park park;
     private Bike bike;
 
-    private Bike bikeOnTheMove;
-    private User userOnTheMove;
+    
 
     public BikePickUpClass(){
         user = null;
         park = null;
         bike = null;
-        bikeOnTheMove = null;
-        userOnTheMove = null;
     }
 
     @Override
@@ -92,30 +89,27 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void pickUp(String idBike, String idUser) throws BikeNotFoundException,BikeOnTheMoveException,UserNotFoundException,UserOnTheMoveException,InsufficientBalanceException {
-    	if((bike == null  || !bike.getID().equals(idBike)) && bikeOnTheMove == null)
+    	if(bike == null  || !bike.getID().equals(idBike))
     		throw new BikeNotFoundException();
-    	if(bikeOnTheMove != null && bike == null)
+    	if(bike.getMoveSituation())
     		throw new BikeOnTheMoveException();
-    	if((user == null || !user.getID().equals(idUser)) && userOnTheMove == null )
+    	if((user == null || !user.getID().equals(idUser)))
     		throw new UserNotFoundException();
-    	if(userOnTheMove != null && user == null)
+    	if(user.getMoveSituation())
     		throw new UserOnTheMoveException();
     	if(user.getBalance() < MIN_PICKUP_BALANCE)
     		throw new UserOnTheMoveException();
 		PickUp pickUp = new PickUpClass(idBike,idUser,bike.getParkID());
 		user.pickUp(pickUp);
 		bike.pickUp(pickUp);
-		userOnTheMove = user;
-		user = null;
-		bikeOnTheMove = bike;
-		bike = null;
+		park.pickUp();
 	}
 
 	@Override
 	public void pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
-    	if((bikeOnTheMove == null || !bikeOnTheMove.getID().equals(idBike)) && bike == null)
+    	if(bike == null || !bike.getID().equals(idBike))
     		throw new BikeNotFoundException();
-    	if(bikeOnTheMove == null)
+    	if(!bike.getMoveSituation())
     		throw new BikeStoppedException();
     	if(!park.getID().equals(finalParkID))
     		throw new ParkNotFoundException();
@@ -123,23 +117,65 @@ public class BikePickUpClass implements BikePickUp {
     		throw new InvalidDataException();
     	user.pickDown(finalParkID,minutes);
     	bike.pickDown(finalParkID,minutes);
-    	bike = bikeOnTheMove;
-		bikeOnTheMove = null;
+    	park.pickDown(bike);
+    	
 	}
 
 	@Override
 	public void chargeUser(String idUser, int value) throws UserNotFoundException, InvalidDataException {
-		if(user == null || !user.getID().equals(idUser) || userOnTheMove == null || !userOnTheMove.getID().equals(idUser))
+		if(user == null || !user.getID().equals(idUser))
 			throw new UserNotFoundException();
 		if(value <= 0)
 			throw new InvalidDataException();
-		if(user == null)
-			userOnTheMove.charge(value);
-		else
-			user.charge(value);
+		user.charge(value);
 	}
 
 	private boolean hasBikeBeenUsed() {
 		return bike.hasBeenUsed();
+	}
+
+	@Override
+	public Iterator<PickUp> getBikePickUps(String idBike) throws BikeNotFoundException, BikeNotUsedException, BikeOnFirstPickUpException {
+		if(bike == null || !bike.getID().equals(idBike))
+			throw new BikeNotFoundException();
+		if(!bike.hasBeenUsed())
+			throw new BikeNotUsedException();
+		if(bike.getMoveSituation())
+			throw new BikeOnFirstPickUpException();
+		return bike.getBikePickUps();
+	}
+
+	@Override
+	public Iterator<PickUp> getUserPickUps(String idUser)
+			throws UserNotFoundException, UserNotUsedSystemException, UserOnFirstPickUpException {
+		
+		if(user == null || !user.getID().equals(idUser))
+			throw new UserNotFoundException();
+		if(!user.hasUsedSystem())
+			throw new UserNotUsedSystemException();
+		if(user.getMoveSituation())
+			throw new UserOnFirstPickUpException();
+		return user.getUserPickUps();
+	}
+
+	@Override
+	public int getUserBalance() {
+		return user.getBalance();
+	}
+
+	@Override
+	public int getUserPoints() {
+		return user.getPoints();
+	}
+
+	@Override
+	public void isBikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
+		if(bike == null || !bike.getID().equals(idBike))
+			throw new BikeNotFoundException();
+		if(park == null || !park.getID().equals(idPark))
+			throw new ParkNotFoundException();
+		if(!park.isBikeInPark())
+			throw new BikeNotInParkException();
+		
 	}
 }

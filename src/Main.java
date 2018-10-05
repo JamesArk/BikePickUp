@@ -1,5 +1,6 @@
 import bikePickUp.BikePickUp;
 import bikePickUp.BikePickUpClass;
+import bikePickUp.Bike.PickUp;
 import bikePickUp.Exceptions.*;
 import bikePickUp.dataStructures.Iterator;
 
@@ -58,8 +59,10 @@ public class Main {
     	USER_INFO_FORMATTER_1("%s; "),
     	USER_PARK_INFO_FORMATTER_2("%s, "),
     	PARK_INFO_FORMATTER_1("%s: "),
-    	PARK_INFO_FORMATTER_2("%s, ");
-    	
+    	PARK_INFO_FORMATTER_2("%s, "),
+    	BIKE_USER_PICK_UPS_FORMATTER("%s %s %s %s %s %d \n"),
+    	PICK_DOWN_SUCESS_FORMATTER("%s: %d euros, %d pontos");
+   
     	private final String formatter;
     	Formatter(String formatter){
     		this.formatter = formatter;
@@ -116,10 +119,13 @@ public class Main {
                     chargeUser(in,bpu);
                     break;
                 case BikePickUps:
+                	bikePickUps(in,bpu);
                     break;
                 case UserPickUps:
+                	userPickUps(in, bpu);
                     break;
                 case ParkedBike:
+                	parkedBike(in,bpu);
                     break;
                 case ListDelayed:
                     break;
@@ -273,7 +279,7 @@ public class Main {
         in.nextLine();
         try {
             bpu.pickDown(idBike,idPark,minutes);
-            System.out.println(Message.PICK_DOWN_SUCESS.msg);
+            System.out.println(String.format(Formatter.PICK_DOWN_SUCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCESS.msg, bpu.getUserBalance(), bpu.getUserPoints()));
         } catch(BikeNotFoundException e) {
             System.out.println(Message.BIKE_NOT_FOUND.msg);
         } catch (BikeStoppedException e) {
@@ -297,6 +303,57 @@ public class Main {
         } catch(InvalidDataException e) {
             System.out.println(Message.INVALID_DATA.msg);
         }
+    }
+    
+    private static void bikePickUps(Scanner in,BikePickUp bpu) {
+    	String idBike = in.nextLine().trim();
+    	try {
+    		Iterator<PickUp> it = bpu.getBikePickUps(idBike);
+    		while(it.hasNext()) {
+    			PickUp p = it.next();
+    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, p.getUserID(), p.getInitialIDPark(), 
+    					p.getFinalParkID(), p.getMinutes(), p.minutesLate(), p.getCost()));
+    		}
+    	} catch(BikeNotFoundException e) {
+    		System.out.println(Message.BIKE_NOT_FOUND.msg);
+    	} catch(BikeNotUsedException e) {
+    		System.out.println(Message.BIKE_NOT_USED.msg);
+    	} catch(BikeOnFirstPickUpException e) {
+    		System.out.println(Message.BIKE_ON_FIRST_PICK_UP.msg);
+    	}
+    }
+    
+    private static void userPickUps(Scanner in,BikePickUp bpu) {
+    	String idUser = in.nextLine().trim();
+    	try {
+    		Iterator<PickUp> it = bpu.getUserPickUps(idUser);
+    		while(it.hasNext()) {
+    			PickUp p = it.next();
+    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, p.getBikeID(), p.getInitialIDPark(), 
+    					p.getFinalParkID(), p.getMinutes(), p.minutesLate(), p.getCost()));
+    		}
+    	} catch(UserNotFoundException e) {
+    		System.out.println(Message.USER_NOT_FOUND.msg);
+    	} catch(UserNotUsedSystemException e) {
+    		System.out.println(Message.USER_NOT_USED_SYSTEM.msg);
+    	} catch(UserOnFirstPickUpException e) {
+    		System.out.println(Message.USER_ON_FIRST_PICKUP.msg);
+    	}
+    }
+    
+    private static void parkedBike(Scanner in, BikePickUp bpu) {
+    	String idBike = in.next().trim();
+    	String idPark = in.nextLine().trim();
+    	try {
+    		bpu.isBikeParked(idBike, idPark);
+    		System.out.println(Message.PARKED_BIKE_SUCESS.msg);
+    	} catch(BikeNotFoundException e) {
+    		System.out.println(Message.USED_BIKE.msg);
+    	} catch(ParkNotFoundException e) {
+    		System.out.println(Message.PARK_NOT_FOUND.msg);
+    	} catch(BikeNotInParkException e) {
+    		System.out.println(Message.BIKE_NOT_IN_PARK.msg);
+    	}
     }
 
 

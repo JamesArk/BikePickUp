@@ -11,6 +11,7 @@ public class UserClass implements User {
     private String NIF,name,address,email,phone,IDuser;
     private int balance,points;
     private List<PickUp> pickUps;
+    private boolean isOnTheMove;
     
 
     public UserClass(String IDuser, String NIF, String email, String phone, String name, String address) {
@@ -23,6 +24,7 @@ public class UserClass implements User {
         this.balance = 0;
         this.points = 0;
         this.pickUps = new DoublyLinkedList<>();
+        isOnTheMove = false;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class UserClass implements User {
     @Override
     public void pickUp(PickUp pickUp) {
         pickUps.addLast(pickUp);
+        isOnTheMove = true;
     }
 
     @Override
@@ -63,10 +66,28 @@ public class UserClass implements User {
          PickUp pickUp = pickUps.getLast();
          pickUp.setFinalParkID(finalParkID);
          pickUp.setMinutes(minutes);
+         pickUp.setCost();
+         balance-= pickUp.getCost();
+         isOnTheMove = false;
     }
 
     @Override
     public void charge(int value) {
         balance += value;
     }
+
+	@Override
+	public boolean getMoveSituation() {
+		return isOnTheMove;
+	}
+
+	@Override
+	public Iterator<PickUp> getUserPickUps() {
+		return pickUps.iterator();
+	}
+
+	@Override
+	public int getPoints() {
+		return points;
+	}
 }

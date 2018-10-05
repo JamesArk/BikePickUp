@@ -1,5 +1,7 @@
 package bikePickUp.Bike;
 
+import bikePickUp.dataStructures.Iterator;
+
 public interface Bike {
 
 	String getID();
@@ -11,4 +13,12 @@ public interface Bike {
 	String getParkID();
 
 	void pickDown(String finalParkID, int minutes);
+	
+	boolean getMoveSituation();
+
+	Iterator<PickUp> getBikePickUps();
+	
+	String getBikeLicense();
+	
+	
 }

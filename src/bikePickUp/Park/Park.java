@@ -10,4 +10,10 @@ public interface Park {
 	Iterator<String> getParkInfo();
 	
 	void addBike(Bike b);
+
+	void pickUp();
+
+	void pickDown(Bike bike);
+
+	boolean isBikeInPark();
 }
