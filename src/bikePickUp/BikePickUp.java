@@ -4,8 +4,10 @@ import bikePickUp.Bike.PickUp;
 import bikePickUp.Exceptions.*;
 import bikePickUp.dataStructures.Iterator;
 
+import java.io.Serializable;
 
-public interface BikePickUp {
+
+public interface BikePickUp extends Serializable {
 
 	int MIN_PICKUP_BALANCE = 5;
     void addUser(String userID, String nif, String email,String phone, String name, String address);
@@ -37,4 +39,8 @@ public interface BikePickUp {
 	int getUserPoints();
 
 	void isBikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException;
+
+	Iterator<String> listDelayed() throws NoTardinessException;
+
+	Iterator<String> favouriteParks() throws NoPickUpsMadeException;
 }

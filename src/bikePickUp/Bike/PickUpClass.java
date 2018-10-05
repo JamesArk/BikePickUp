@@ -43,7 +43,10 @@ public class PickUpClass implements PickUp{
 
     @Override
     public int minutesLate() {
-        return minutes - MAX_MINS;
+        if(minutes >= 60)
+            return minutes - MAX_MINS;
+        else
+            return 0;
     }
 
 	@Override
@@ -64,8 +67,14 @@ public class PickUpClass implements PickUp{
 		}
 	}
 
+
 	@Override
 	public int getCost() {
 		return cost;
 	}
+
+    @Override
+    public boolean isThereTardiness() {
+        return cost != 0;
+    }
 }

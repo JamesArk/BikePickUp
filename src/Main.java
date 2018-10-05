@@ -4,6 +4,7 @@ import bikePickUp.Bike.PickUp;
 import bikePickUp.Exceptions.*;
 import bikePickUp.dataStructures.Iterator;
 
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -12,6 +13,8 @@ import java.util.Scanner;
  */
 public class Main {
 
+
+    private static final String DATA_FILE = "storedBikePickUp.data";
 
     private enum Message{
         ADD_USER_SUCCESS("Insercao de utilizador com sucesso."),
@@ -42,8 +45,8 @@ public class Main {
         PARKED_BIKE_SUCESS("Bicicleta estacionada no parque."),
         BIKE_NOT_IN_PARK("Bicicleta nao esta em parque."),
         NO_TARDINESS("Nao se registaram atrasos."),
-        NO_PICK_UPS_MADE("Não foram efectuados pickups."),
-        EXIT("Gravando e terminando.");
+        NO_PICK_UPS_MADE("Nao foram efetuados pickups."),
+        EXIT("Gravando e terminando...");
 
 
 
@@ -55,14 +58,13 @@ public class Main {
     }
     
     private enum Formatter {
-    	
-    	USER_INFO_FORMATTER_1("%s; "),
+
     	USER_PARK_INFO_FORMATTER_2("%s, "),
-    	PARK_INFO_FORMATTER_1("%s: "),
-    	PARK_INFO_FORMATTER_2("%s, "),
-    	BIKE_USER_PICK_UPS_FORMATTER("%s %s %s %s %s %d \n"),
-    	PICK_DOWN_SUCESS_FORMATTER("%s: %d euros, %d pontos");
-   
+    	USER_PARK_INFO_FORMATTER_1("%s: "),
+    	BIKE_USER_PICK_UPS_FORMATTER("%s %s %s %s %s %d"),
+    	PICK_DOWN_SUCCESS_FORMATTER("%s%d euros, %d pontos"),
+        USER_BALANCE_FORMATTER("%s%d euros");
+
     	private final String formatter;
     	Formatter(String formatter){
     		this.formatter = formatter;
@@ -70,81 +72,83 @@ public class Main {
     }
 
     private enum Command{
-        AddUser,RemoveUser,GetUserInfo,AddPark,
-        AddBike,RemoveBike,GetParkInfo,PickUp,
-        PickDown,ChargeUser,BikePickUps,UserPickUps,
-        ParkedBike,ListDelayed,FavoriteParks,XS,UNKNOWN
+        ADDUSER, REMOVEUSER, GETUSERINFO, ADDPARK,
+        ADDBIKE, REMOVEBIKE, GETPARKINFO, PICKUP,
+        PICKDOWN, CHARGEUSER, BIKEPICKUPS, USERPICKUPS,
+        PARKEDBIKE, LISTDELAYED, FAVORITEPARKS,XS,UNKNOWN
     }
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-        BikePickUpClass bpu = new BikePickUpClass();
+        BikePickUp bpu = load();
         initializeProgramme(in,bpu);
 
     }
 
-    private static void initializeProgramme(Scanner in, BikePickUpClass bpu) {
+    private static void initializeProgramme(Scanner in, BikePickUp bpu) {
         Command command;
         do {
         	command = getCommand(in);
             switch (command) {
-                case AddUser:
+                case ADDUSER:
                     addUserCommand(in,bpu);
                     break;
-                case RemoveUser:
+                case REMOVEUSER:
                     removeUser(in,bpu);
                     break;
-                case GetUserInfo:
+                case GETUSERINFO:
                 	getUserInfo(in,bpu);
                     break;
-                case AddPark:
+                case ADDPARK:
                 	addPark(in,bpu);
                     break;
-                case AddBike:
+                case ADDBIKE:
                 	addBike(in,bpu);
                     break;
-                case RemoveBike:
+                case REMOVEBIKE:
                 	removeBike(in,bpu);
                     break;
-                case GetParkInfo:
+                case GETPARKINFO:
                 	getParkInfo(in, bpu);
                     break;
-                case PickUp:
+                case PICKUP:
                     pickUp(in,bpu);
                     break;
-                case PickDown:
+                case PICKDOWN:
                     pickDown(in,bpu);
                     break;
-                case ChargeUser:
+                case CHARGEUSER:
                     chargeUser(in,bpu);
                     break;
-                case BikePickUps:
+                case BIKEPICKUPS:
                 	bikePickUps(in,bpu);
                     break;
-                case UserPickUps:
+                case USERPICKUPS:
                 	userPickUps(in, bpu);
                     break;
-                case ParkedBike:
+                case PARKEDBIKE:
                 	parkedBike(in,bpu);
                     break;
-                case ListDelayed:
+                case LISTDELAYED:
+                    listDelayed(bpu);
                     break;
-                case FavoriteParks:
+                case FAVORITEPARKS:
+                    favouriteParks(bpu);
                     break;
                 case XS:
-                	System.out.println(Message.EXIT.msg);
-                	in.close();
+                	save(bpu);
                     break;
                 case UNKNOWN:
                     break;
             }
-            System.out.println("\n");
+            System.out.print("\n");
         } while(!command.equals(Command.XS));
+        in.close();
     }
 
     private static Command getCommand(Scanner in) {
         try {
-            return Command.valueOf(in.next().trim());
+            return Command.valueOf(in.next().trim().toUpperCase());
         } catch(IllegalArgumentException e) {
             return Command.UNKNOWN;
         }
@@ -181,12 +185,11 @@ public class Main {
 
     private static void getUserInfo(Scanner in,BikePickUp bpu) {
         String userID = in.nextLine().trim();
-        String msg = "";
-
         try {
+            String msg = "";
         	Iterator<String> userInfo = bpu.getUserInfo(userID);
         	if(userInfo.hasNext())
-        	    msg += String.format(Formatter.USER_INFO_FORMATTER_1.formatter, userInfo.next());
+        	    msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_1.formatter, userInfo.next());
         	while(userInfo.hasNext())
         	    msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, userInfo.next());
 
@@ -239,11 +242,11 @@ public class Main {
     
     private static void getParkInfo(Scanner in,BikePickUp bpu) {
     	String parkID = in.nextLine().trim();
-    	String msg = "";
     	try {
+            String msg = "";
     		Iterator<String> parkInfo = bpu.getParkInfo(parkID);
     		if(parkInfo.hasNext())
-    		    msg += String.format(Formatter.PARK_INFO_FORMATTER_1.formatter, parkInfo.next());
+    		    msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_1.formatter, parkInfo.next());
     		while(parkInfo.hasNext()) {
     			msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, parkInfo.next());
     		}
@@ -253,7 +256,7 @@ public class Main {
     	}
     }
 
-    private static void pickUp(Scanner in, BikePickUpClass bpu) {
+    private static void pickUp(Scanner in, BikePickUp bpu) {
         String idBike = in.next().trim();
         String idUser = in.nextLine().trim();
         try {
@@ -279,7 +282,7 @@ public class Main {
         in.nextLine();
         try {
             bpu.pickDown(idBike,idPark,minutes);
-            System.out.println(String.format(Formatter.PICK_DOWN_SUCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCESS.msg, bpu.getUserBalance(), bpu.getUserPoints()));
+            System.out.println(String.format(Formatter.PICK_DOWN_SUCCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCESS.msg, bpu.getUserBalance(), bpu.getUserPoints()));
         } catch(BikeNotFoundException e) {
             System.out.println(Message.BIKE_NOT_FOUND.msg);
         } catch (BikeStoppedException e) {
@@ -297,7 +300,7 @@ public class Main {
         in.nextLine();
         try {
             bpu.chargeUser(idUser,value);
-            System.out.println(Message.CHARGE_USER_SUCESS.msg);
+            System.out.println(String.format(Formatter.USER_BALANCE_FORMATTER.formatter,Message.CHARGE_USER_SUCESS.msg,bpu.getUserBalance()));
         } catch(UserNotFoundException e) {
             System.out.println(Message.USER_NOT_FOUND.msg);
         } catch(InvalidDataException e) {
@@ -348,7 +351,7 @@ public class Main {
     		bpu.isBikeParked(idBike, idPark);
     		System.out.println(Message.PARKED_BIKE_SUCESS.msg);
     	} catch(BikeNotFoundException e) {
-    		System.out.println(Message.USED_BIKE.msg);
+    		System.out.println(Message.BIKE_NOT_FOUND.msg);
     	} catch(ParkNotFoundException e) {
     		System.out.println(Message.PARK_NOT_FOUND.msg);
     	} catch(BikeNotInParkException e) {
@@ -356,7 +359,61 @@ public class Main {
     	}
     }
 
+    private static void listDelayed(BikePickUp bpu) {
+        try{
+            Iterator<String> list = bpu.listDelayed();
+            String msg = "";
+            if(list.hasNext())
+                msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_1.formatter, list.next());
+            while(list.hasNext())
+                msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, list.next());
 
+            System.out.println(msg.substring(0, msg.length()-2));
+        } catch (NoTardinessException e){
+            System.out.println(Message.NO_TARDINESS.msg);
+        }
+    }
 
+    private static void favouriteParks(BikePickUp bpu) {
+        try {
+            String msg = "";
+            Iterator<String> list = bpu.favouriteParks();
+            if(list.hasNext())
+                msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_1.formatter, list.next());
+            while(list.hasNext()) {
+                msg += String.format(Formatter.USER_PARK_INFO_FORMATTER_2.formatter, list.next());
+            }
+            System.out.println(msg.substring(0, msg.length()-2));
+        } catch(NoPickUpsMadeException e) {
+            System.out.println(Message.NO_PICK_UPS_MADE.msg);
+        }
+    }
 
+    private static void save(BikePickUp bpu) {
+        try {
+            System.out.println(Message.EXIT.msg);
+            ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
+            file.writeObject(bpu);
+            file.flush();
+            file.close();
+        } catch (IOException e ){
+            System.out.println("Data file corrupted");
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static BikePickUp load() {
+        try{
+            ObjectInputStream file  = new ObjectInputStream(new FileInputStream(DATA_FILE));
+            BikePickUp bpu = (BikePickUp) file.readObject();
+            file.close();
+            return bpu;
+        } catch(IOException e){
+            System.out.println("load not right.");
+        }
+        catch(ClassNotFoundException e){
+            System.out.println("Corrupted file");
+
+        }return new BikePickUpClass();
+    }
 }

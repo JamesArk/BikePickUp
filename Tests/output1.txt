@@ -38,7 +38,7 @@ joao luis: 200000000, rua das acacias 19, Costa de Caparica, joao@emcasa.pt, 212
 
 Parque existente.
 
-Não foram efetuados pickups.
+Nao foram efetuados pickups.
 
 Bicicleta inexistente.
 

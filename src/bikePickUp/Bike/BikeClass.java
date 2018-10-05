@@ -49,7 +49,7 @@ public class BikeClass implements Bike {
     }
 
 	@Override
-	public boolean getMoveSituation() {
+	public boolean isOnTheMove() {
 		return isOnTheMove;
 	}
 

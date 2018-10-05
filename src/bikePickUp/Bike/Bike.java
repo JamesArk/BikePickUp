@@ -2,7 +2,9 @@ package bikePickUp.Bike;
 
 import bikePickUp.dataStructures.Iterator;
 
-public interface Bike {
+import java.io.Serializable;
+
+public interface Bike extends Serializable {
 
 	String getID();
 
@@ -14,7 +16,7 @@ public interface Bike {
 
 	void pickDown(String finalParkID, int minutes);
 	
-	boolean getMoveSituation();
+	boolean isOnTheMove();
 
 	Iterator<PickUp> getBikePickUps();
 	

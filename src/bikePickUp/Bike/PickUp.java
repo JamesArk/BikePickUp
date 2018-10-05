@@ -1,6 +1,8 @@
 package bikePickUp.Bike;
 
-public interface PickUp {
+import java.io.Serializable;
+
+public interface PickUp extends Serializable {
 
     int MAX_MINS = 60;
     
@@ -25,4 +27,6 @@ public interface PickUp {
 	void setCost();
 
 	int getCost();
+
+	boolean isThereTardiness();
 }

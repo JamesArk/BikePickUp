@@ -2,7 +2,7 @@ Bicicleta parada.
 
 Nao se registaram atrasos.
 
-Não foram efetuados pickups.
+Nao foram efetuados pickups.
 
 Parque existente.
 

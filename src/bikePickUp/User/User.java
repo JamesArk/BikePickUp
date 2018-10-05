@@ -3,9 +3,10 @@ package bikePickUp.User;
 
 import bikePickUp.Bike.PickUp;
 import bikePickUp.dataStructures.Iterator;
+import java.io.Serializable;
 
 
-public interface User {
+public interface User  extends Serializable {
     
 	String getID();
 	
@@ -21,9 +22,11 @@ public interface User {
 
     void charge(int value);
     
-    boolean getMoveSituation();
+    boolean isOnTheMove();
     
 	Iterator<PickUp> getUserPickUps();
 	
 	int getPoints();
+
+    boolean isThereTardiness();
 }

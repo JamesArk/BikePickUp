@@ -3,7 +3,9 @@ package bikePickUp.Park;
 import bikePickUp.Bike.Bike;
 import bikePickUp.dataStructures.Iterator;
 
-public interface Park {
+import java.io.Serializable;
+
+public interface Park  extends Serializable {
 
 	String getID();
 	
@@ -16,4 +18,8 @@ public interface Park {
 	void pickDown(Bike bike);
 
 	boolean isBikeInPark();
+
+    Iterator<String> getFavouriteParkInfo();
+
+	void removeBike();
 }

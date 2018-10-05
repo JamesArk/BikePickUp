@@ -12,6 +12,7 @@ public class UserClass implements User {
     private int balance,points;
     private List<PickUp> pickUps;
     private boolean isOnTheMove;
+    private boolean isTardy;
     
 
     public UserClass(String IDuser, String NIF, String email, String phone, String name, String address) {
@@ -21,7 +22,7 @@ public class UserClass implements User {
         this.email = email;
         this.phone = phone;
         this.IDuser = IDuser;
-        this.balance = 0;
+        this.balance = 5;
         this.points = 0;
         this.pickUps = new DoublyLinkedList<>();
         isOnTheMove = false;
@@ -67,6 +68,7 @@ public class UserClass implements User {
          pickUp.setFinalParkID(finalParkID);
          pickUp.setMinutes(minutes);
          pickUp.setCost();
+         points += pickUp.getCost();
          balance-= pickUp.getCost();
          isOnTheMove = false;
     }
@@ -77,7 +79,7 @@ public class UserClass implements User {
     }
 
 	@Override
-	public boolean getMoveSituation() {
+	public boolean isOnTheMove() {
 		return isOnTheMove;
 	}
 
@@ -90,4 +92,9 @@ public class UserClass implements User {
 	public int getPoints() {
 		return points;
 	}
+
+    @Override
+    public boolean isThereTardiness() {
+        return points > 0;
+    }
 }

@@ -14,13 +14,14 @@ public class BikePickUpClass implements BikePickUp {
     private User user;
     private Park park;
     private Bike bike;
-
-    
+    private User tardiUser;
+    private Park favouritePark;
 
     public BikePickUpClass(){
         user = null;
         park = null;
         bike = null;
+        tardiUser = null;
     }
 
     @Override
@@ -45,7 +46,7 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public Iterator<String> getUserInfo(String userID) throws UserNotFoundException {
-		if(user == null||!user.getID().equals(userID))
+		if(user == null||!user.getID().equalsIgnoreCase(userID))
 			throw new UserNotFoundException();
 		return user.getUserInfo();
 	}
@@ -72,16 +73,17 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void removeBike(String bikeID) throws BikeNotFoundException,UsedBikeException {
-		if(bike == null || !bike.getID().equals(bikeID))
+		if(bike == null || !bike.getID().equalsIgnoreCase(bikeID))
 			throw new BikeNotFoundException();
 		if(hasBikeBeenUsed())
 			throw new UsedBikeException();
 		bike = null;
+		park.removeBike();
 	}
 
 	@Override
 	public Iterator<String> getParkInfo(String parkID) throws ParkNotFoundException {
-		if(park == null || !park.getID().equals(parkID))
+		if(park == null || !park.getID().equalsIgnoreCase(parkID))
 			throw new ParkNotFoundException();
 		return park.getParkInfo();
 		
@@ -91,15 +93,16 @@ public class BikePickUpClass implements BikePickUp {
 	public void pickUp(String idBike, String idUser) throws BikeNotFoundException,BikeOnTheMoveException,UserNotFoundException,UserOnTheMoveException,InsufficientBalanceException {
     	if(bike == null  || !bike.getID().equals(idBike))
     		throw new BikeNotFoundException();
-    	if(bike.getMoveSituation())
+    	if(bike.isOnTheMove())
     		throw new BikeOnTheMoveException();
-    	if((user == null || !user.getID().equals(idUser)))
+    	if(user == null || !user.getID().equals(idUser))
     		throw new UserNotFoundException();
-    	if(user.getMoveSituation())
+    	if(user.isOnTheMove())
     		throw new UserOnTheMoveException();
     	if(user.getBalance() < MIN_PICKUP_BALANCE)
-    		throw new UserOnTheMoveException();
+    		throw new InsufficientBalanceException();
 		PickUp pickUp = new PickUpClass(idBike,idUser,bike.getParkID());
+		favouritePark = park;
 		user.pickUp(pickUp);
 		bike.pickUp(pickUp);
 		park.pickUp();
@@ -109,13 +112,15 @@ public class BikePickUpClass implements BikePickUp {
 	public void pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
     	if(bike == null || !bike.getID().equals(idBike))
     		throw new BikeNotFoundException();
-    	if(!bike.getMoveSituation())
+    	if(!bike.isOnTheMove())
     		throw new BikeStoppedException();
     	if(!park.getID().equals(finalParkID))
     		throw new ParkNotFoundException();
     	if(minutes <= 0)
     		throw new InvalidDataException();
     	user.pickDown(finalParkID,minutes);
+    	if(user.isThereTardiness())
+    	    tardiUser = user;
     	bike.pickDown(finalParkID,minutes);
     	park.pickDown(bike);
     	
@@ -136,11 +141,11 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public Iterator<PickUp> getBikePickUps(String idBike) throws BikeNotFoundException, BikeNotUsedException, BikeOnFirstPickUpException {
-		if(bike == null || !bike.getID().equals(idBike))
+		if(bike == null || !bike.getID().equalsIgnoreCase(idBike))
 			throw new BikeNotFoundException();
 		if(!bike.hasBeenUsed())
 			throw new BikeNotUsedException();
-		if(bike.getMoveSituation())
+		if(bike.isOnTheMove())
 			throw new BikeOnFirstPickUpException();
 		return bike.getBikePickUps();
 	}
@@ -149,11 +154,11 @@ public class BikePickUpClass implements BikePickUp {
 	public Iterator<PickUp> getUserPickUps(String idUser)
 			throws UserNotFoundException, UserNotUsedSystemException, UserOnFirstPickUpException {
 		
-		if(user == null || !user.getID().equals(idUser))
+		if(user == null || !user.getID().equalsIgnoreCase(idUser))
 			throw new UserNotFoundException();
 		if(!user.hasUsedSystem())
 			throw new UserNotUsedSystemException();
-		if(user.getMoveSituation())
+		if(user.isOnTheMove())
 			throw new UserOnFirstPickUpException();
 		return user.getUserPickUps();
 	}
@@ -176,6 +181,19 @@ public class BikePickUpClass implements BikePickUp {
 			throw new ParkNotFoundException();
 		if(!park.isBikeInPark())
 			throw new BikeNotInParkException();
-		
 	}
+
+    @Override
+    public Iterator<String> listDelayed() throws NoTardinessException{
+        if(tardiUser == null)
+            throw new NoTardinessException();
+        return tardiUser.getUserInfo();
+    }
+
+    @Override
+    public Iterator<String> favouriteParks() throws NoPickUpsMadeException {
+        if(favouritePark == null)
+            throw new NoPickUpsMadeException();
+        return favouritePark.getFavouriteParkInfo();
+    }
 }
