@@ -8,11 +8,14 @@ import bikePickUp.dataStructures.List;
 
 public class UserClass implements User {
 
-    private String NIF,name,address,email,phone,IDuser;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String NIF,name,address,email,phone,IDuser;
     private int balance,points;
     private List<PickUp> pickUps;
     private boolean isOnTheMove;
-    private boolean isTardy;
     
 
     public UserClass(String IDuser, String NIF, String email, String phone, String name, String address) {

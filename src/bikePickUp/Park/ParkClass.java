@@ -5,7 +5,11 @@ import bikePickUp.dataStructures.*;
 
 public class ParkClass implements Park {
 
-    private String parkID,name,address;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String parkID,name,address;
     private Bike bike;
     private int nBikes;
     private int nPickUps;

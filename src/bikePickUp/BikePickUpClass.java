@@ -11,7 +11,11 @@ import bikePickUp.dataStructures.Iterator;
 
 public class BikePickUpClass implements BikePickUp {
 
-    private User user;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private User user;
     private Park park;
     private Bike bike;
     private User tardiUser;

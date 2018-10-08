@@ -2,7 +2,11 @@ package bikePickUp.Bike;
 
 public class PickUpClass implements PickUp{
 
-    private String idBike,idUser,initialParkID,finalParkID;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String idBike,idUser,initialParkID,finalParkID;
     private int minutes,cost;
     
     public PickUpClass(String idBike,String idUser,String initialParkID){

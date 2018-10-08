@@ -19,6 +19,8 @@ public interface Bike extends Serializable {
 	boolean isOnTheMove();
 
 	Iterator<PickUp> getBikePickUps();
+	
+	String getBikeLicense();
 
 
 }

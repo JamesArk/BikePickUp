@@ -6,7 +6,11 @@ import bikePickUp.dataStructures.List;
 
 public class BikeClass implements Bike {
 
-    private String id, parkID,bikeLicense;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String id, parkID,bikeLicense;
     private List<PickUp> pickUps;
     private boolean isOnTheMove;
 
@@ -56,6 +60,11 @@ public class BikeClass implements Bike {
 	@Override
 	public Iterator<PickUp> getBikePickUps() {
 		return pickUps.iterator();
+	}
+
+	@Override
+	public String getBikeLicense() {
+		return bikeLicense;
 	}
 
 }
