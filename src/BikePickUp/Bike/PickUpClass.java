@@ -2,13 +2,27 @@ package BikePickUp.Bike;
 
 public class PickUpClass implements PickUp{
 
-    /**
-	 * 
+	/**
+	 * Constant for serialization
 	 */
 	private static final long serialVersionUID = 0L;
+
+    /**
+     * Bike identification, User identification, Park identification where the pickup was made, Park identification where the dropOff (pickdown) was made.
+     */
 	private String idBike,idUser,initialParkID,finalParkID;
-    private int minutes,cost;
-    
+
+    /**
+     * Total minutes, total cost.
+     */
+	private int minutes,cost;
+
+    /**
+     *
+     * @param idBike Bike identification
+     * @param idUser User identification
+     * @param initialParkID Park identification where the pickup was made.
+     */
     public PickUpClass(String idBike,String idUser,String initialParkID){
     	this.idBike = idBike;
     	this.idUser = idUser;

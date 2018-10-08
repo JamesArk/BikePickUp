@@ -7,13 +7,31 @@ import dataStructures.List;
 public class BikeClass implements Bike {
 
     /**
-	 * 
-	 */
+     * Constant for serialization
+     */
 	private static final long serialVersionUID = 0L;
+
+    /**
+     * Bike identification, Park identification and the bike's license.
+     */
 	private String id, parkID,bikeLicense;
+
+    /**
+     * List of all the pickups that the bike was involved.
+     */
     private List<PickUp> pickUps;
+
+    /**
+     * Unfinished pickup that is being executed.
+     */
     private PickUp currentPickUp;
 
+    /**
+     *
+     * @param id Bike identification.
+     * @param parkID Park identification.
+     * @param bikeLicense Bike's license.
+     */
     public BikeClass(String id, String parkID, String bikeLicense) {
         this.id = id;
         this.parkID = parkID;
@@ -70,5 +88,4 @@ public class BikeClass implements Bike {
     public boolean isOnTheMove() {
         return  currentPickUp != null;
     }
-
 }

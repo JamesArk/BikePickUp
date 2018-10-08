@@ -5,15 +5,37 @@ import dataStructures.*;
 
 public class ParkClass implements Park {
 
-    /**
-	 * 
+	/**
+	 * Constant for serialization
 	 */
 	private static final long serialVersionUID = 0L;
-	private String parkID,name,address;
-    private Bike bike;
-    private int nBikes;
-    private int nPickUps;
 
+    /**
+     * Park identification, Park name, Park address.
+     */
+	private String parkID,name,address;
+
+    /**
+     * Bike parked at the park
+     */
+	private Bike bike;
+
+    /**
+     * Total number of bikes parked in this park.
+     */
+	private int nBikes;
+
+    /**
+     * Total number of pickups were made from this park.
+     */
+	private int nPickUps;
+
+    /**
+     *
+     * @param parkID Park identification
+     * @param name Park name
+     * @param address Park address.
+     */
     public ParkClass(String parkID, String name, String address) {
         this.parkID = parkID;
         this.name = name;
@@ -33,11 +55,16 @@ public class ParkClass implements Park {
 		return getInfo(nBikes);
 	}
 
-	private Iterator<String> getInfo(int i) {
+    /**
+     *
+     * @param nBikes Total number of bikes parked in this park.
+     * @return all of the parks info in a order.
+     */
+	private Iterator<String> getInfo(int nBikes) {
         List<String> list = new DoublyLinkedList<>();
         list.addLast(name);
         list.addLast(address);
-        list.addLast(Integer.toString(i));
+        list.addLast(Integer.toString(nBikes));
         return list.iterator();
     }
 

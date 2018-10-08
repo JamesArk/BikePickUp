@@ -10,13 +10,36 @@ import dataStructures.Iterator;
 
 public class BikePickUpClass implements BikePickUp {
 
+	/**
+	 * Constant for serialization
+	 */
 	static final long serialVersionUID = 0L;
-	
+
+    /**
+     * User of the system.
+     */
 	private User user;
-    private Park park;
-    private Bike bike;
-    private User tardyUser;
-    private Park favouritePark;
+
+    /**
+     * Park of the system.
+     */
+	private Park park;
+
+    /**
+     * Bike of the system.
+     */
+	private Bike bike;
+
+    /**
+     * A user that has a least one pickup which surpassed 60 mins until dropOff (pickdown).
+     */
+	private User tardyUser;
+
+    /**
+     * The user's favorite park
+     */
+	private Park favouritePark;
+
 
     public BikePickUpClass(){
         user = null;
@@ -190,27 +213,54 @@ public class BikePickUpClass implements BikePickUp {
         return favouritePark.getFavouriteParkInfo();
     }
 
+    /**
+     * Returns true if the bike has already been used.
+     * @return true if bike was used.
+     */
 	private boolean hasBikeBeenUsed() {
 		return bike.hasBeenUsed();
 	}
 
-
+    /**
+     *  Returns true if the user is not registered in the system.
+     * @param idUser User identification
+     * @return true if the user is not registered
+     */
     private boolean userNotFound(String idUser) {
         return user == null || !user.getID().equalsIgnoreCase(idUser);
     }
 
+    /**
+     * Returns true if the user used the system.
+     * @return true if the user used the system.
+     */
     private boolean hasUserUsedSystem() {
         return user.hasUsedSystem();
     }
 
+    /**
+     * Returns true if the park is not registered in the system.
+     * @param idPark Park identification
+     * @return true if park is not registered
+     */
     private boolean parkNotFound(String idPark) {
         return park == null || !park.getID().equalsIgnoreCase(idPark);
     }
 
+    /**
+     * Returns true if the bike is not registered in the system.
+     * @param bikeID Bike identification
+     * @return true if bike is not registered
+     */
     private boolean bikeNotFound(String bikeID) {
         return bike == null || !bike.getID().equalsIgnoreCase(bikeID);
     }
 
+    /**
+     * Returns true if the the value is invalid (below or equal to zero)
+     * @param value
+     * @return
+     */
     private boolean invalidData(int value) {
         return value <= 0;
     }

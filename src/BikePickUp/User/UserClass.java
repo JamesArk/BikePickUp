@@ -9,22 +9,47 @@ import dataStructures.List;
 public class UserClass implements User {
 
     /**
-	 * 
-	 */
+     * Constant for serialization
+     */
 	private static final long serialVersionUID = 0L;
-	private String NIF,name,address,email,phone,IDuser;
-    private int balance,points;
-    private List<PickUp> pickUps;
-    private PickUp currentPickUp;
-    
 
-    public UserClass(String IDuser, String NIF, String email, String phone, String name, String address) {
+    /**
+     * User NIF, User name, User address, User email, User phone number, User identification
+     */
+	private String NIF,name,address,email,phone, userID;
+
+    /**
+     * User balance and points.
+     */
+    private int balance,points;
+
+    /**
+     *  List of all pickups where the user was involved.
+     */
+    private List<PickUp> pickUps;
+
+    /**
+     * Unfinished pickup that is being executed.
+     */
+    private PickUp currentPickUp;
+
+
+    /**
+     *
+     * @param userID User identification
+     * @param NIF User NIF
+     * @param email User email
+     * @param phone User phone number
+     * @param name User name
+     * @param address User address
+     */
+    public UserClass(String userID, String NIF, String email, String phone, String name, String address) {
         this.NIF = NIF;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.IDuser = IDuser;
+        this.userID = userID;
         this.balance = 5;
         this.points = 0;
         this.pickUps = new DoublyLinkedList<>();
@@ -33,7 +58,7 @@ public class UserClass implements User {
 
     @Override
     public String getID() {
-        return IDuser;
+        return userID;
     }
 
 	@Override

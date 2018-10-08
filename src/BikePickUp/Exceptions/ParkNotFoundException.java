@@ -2,12 +2,7 @@ package BikePickUp.Exceptions;
 
 public class ParkNotFoundException extends RuntimeException {
 	/**
-	 * 
+	 * Constant for serialization
 	 */
 	private static final long serialVersionUID = 0L;
-	
-	public ParkNotFoundException() {
-		super();
-	}
-
 }
