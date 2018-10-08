@@ -1,4 +1,4 @@
-package bikePickUp.dataStructures;
+package dataStructures;
 
 /**
  * Implementation of Two Way Iterator for DLList 

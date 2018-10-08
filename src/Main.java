@@ -1,8 +1,8 @@
-import bikePickUp.BikePickUp;
-import bikePickUp.BikePickUpClass;
-import bikePickUp.Bike.PickUp;
-import bikePickUp.Exceptions.*;
-import bikePickUp.dataStructures.Iterator;
+import BikePickUp.Bike.PickUp;
+import BikePickUp.BikePickUp;
+import BikePickUp.BikePickUpClass;
+import BikePickUp.Exceptions.*;
+import dataStructures.Iterator;
 
 import java.io.*;
 import java.util.Scanner;

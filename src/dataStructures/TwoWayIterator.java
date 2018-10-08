@@ -1,4 +1,4 @@
-package bikePickUp.dataStructures;
+package dataStructures;
 
 /**
  * TwoWayIterator Abstract Data Type 

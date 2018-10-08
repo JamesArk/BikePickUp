@@ -1,4 +1,4 @@
-package bikePickUp.dataStructures;
+package dataStructures;
 
 /**
  * Doubly linked list Implementation 
