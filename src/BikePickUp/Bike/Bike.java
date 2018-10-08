@@ -6,8 +6,12 @@ import java.io.Serializable;
 
 public interface Bike extends Serializable {
 
+	/**
+	 * 
+	 * @return bike's identification
+	 */
 	String getID();
-
+	
 	void pickUp(PickUp pickUp);
 
 	boolean hasBeenUsed();

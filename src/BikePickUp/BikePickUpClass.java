@@ -31,7 +31,7 @@ public class BikePickUpClass implements BikePickUp {
 	private Bike bike;
 
     /**
-     * A user that has a least one pickup which surpassed 60 mins until dropOff (pickdown).
+     * A user that has at least one pickup which surpassed 60 mins until dropOff (pickdown).
      */
 	private User tardyUser;
 
@@ -41,6 +41,9 @@ public class BikePickUpClass implements BikePickUp {
 	private Park favouritePark;
 
 
+	/**
+	 * System's constructor
+	 */
     public BikePickUpClass(){
         user = null;
         park = null;
