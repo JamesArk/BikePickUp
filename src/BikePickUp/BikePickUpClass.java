@@ -10,10 +10,8 @@ import dataStructures.Iterator;
 
 public class BikePickUpClass implements BikePickUp {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	static final long serialVersionUID = 0L;
+	
 	private User user;
     private Park park;
     private Bike bike;

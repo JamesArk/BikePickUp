@@ -11,7 +11,7 @@ public class UserClass implements User {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 0L;
 	private String NIF,name,address,email,phone,IDuser;
     private int balance,points;
     private List<PickUp> pickUps;

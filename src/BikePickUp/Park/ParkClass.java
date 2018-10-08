@@ -8,7 +8,7 @@ public class ParkClass implements Park {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 0L;
 	private String parkID,name,address;
     private Bike bike;
     private int nBikes;
