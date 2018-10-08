@@ -22,11 +22,13 @@ public interface User  extends Serializable {
 
     void charge(int value);
     
-    boolean isOnTheMove();
+    boolean isUserIsOnFirstPickUp();
     
 	Iterator<PickUp> getUserPickUps();
 	
 	int getPoints();
 
     boolean isThereTardiness();
+
+    boolean isOnTheMove();
 }

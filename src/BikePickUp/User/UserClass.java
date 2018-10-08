@@ -15,7 +15,7 @@ public class UserClass implements User {
 	private String NIF,name,address,email,phone,IDuser;
     private int balance,points;
     private List<PickUp> pickUps;
-    private boolean isOnTheMove;
+    private PickUp currentPickUp;
     
 
     public UserClass(String IDuser, String NIF, String email, String phone, String name, String address) {
@@ -28,7 +28,7 @@ public class UserClass implements User {
         this.balance = 5;
         this.points = 0;
         this.pickUps = new DoublyLinkedList<>();
-        isOnTheMove = false;
+        this.currentPickUp = null;
     }
 
     @Override
@@ -56,24 +56,23 @@ public class UserClass implements User {
 
     @Override
     public void pickUp(PickUp pickUp) {
-        pickUps.addLast(pickUp);
-        isOnTheMove = true;
+        currentPickUp = pickUp;
     }
 
     @Override
     public boolean hasUsedSystem() {
-        return !pickUps.isEmpty();
+        return !pickUps.isEmpty() || currentPickUp != null;
     }
 
     @Override
     public void pickDown(String finalParkID, int minutes) {
-         PickUp pickUp = pickUps.getLast();
-         pickUp.setFinalParkID(finalParkID);
-         pickUp.setMinutes(minutes);
-         pickUp.setCost();
-         points += pickUp.getCost();
-         balance-= pickUp.getCost();
-         isOnTheMove = false;
+         currentPickUp.setFinalParkID(finalParkID);
+         currentPickUp.setMinutes(minutes);
+         currentPickUp.setCost();
+         points += currentPickUp.getCost();
+         balance-= currentPickUp.getCost();
+         pickUps.addLast(currentPickUp);
+         currentPickUp = null;
     }
 
     @Override
@@ -82,8 +81,8 @@ public class UserClass implements User {
     }
 
 	@Override
-	public boolean isOnTheMove() {
-		return isOnTheMove;
+	public boolean isUserIsOnFirstPickUp() {
+		return pickUps.isEmpty() &&  currentPickUp != null ;
 	}
 
 	@Override
@@ -99,5 +98,10 @@ public class UserClass implements User {
     @Override
     public boolean isThereTardiness() {
         return points > 0;
+    }
+
+    @Override
+    public boolean isOnTheMove() {
+        return currentPickUp != null;
     }
 }

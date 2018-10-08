@@ -16,11 +16,12 @@ public interface Bike extends Serializable {
 
 	void pickDown(String finalParkID, int minutes);
 	
-	boolean isOnTheMove();
+	boolean isBikeOnFirstPickUp();
 
 	Iterator<PickUp> getBikePickUps();
 	
 	String getBikeLicense();
 
 
+	boolean isOnTheMove();
 }

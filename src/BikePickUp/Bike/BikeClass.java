@@ -12,14 +12,14 @@ public class BikeClass implements Bike {
 	private static final long serialVersionUID = 0L;
 	private String id, parkID,bikeLicense;
     private List<PickUp> pickUps;
-    private boolean isOnTheMove;
+    private PickUp currentPickUp;
 
     public BikeClass(String id, String parkID, String bikeLicense) {
         this.id = id;
         this.parkID = parkID;
         this.bikeLicense = bikeLicense;
         this.pickUps = new DoublyLinkedList<>();
-        isOnTheMove = false;
+        this.currentPickUp = null;
     }
 
 	@Override
@@ -29,13 +29,12 @@ public class BikeClass implements Bike {
 
     @Override
     public void pickUp(PickUp pickUp) {
-        pickUps.addLast(pickUp);
-        isOnTheMove = true;
+        currentPickUp = pickUp;
     }
 
     @Override
     public boolean hasBeenUsed() {
-        return !pickUps.isEmpty();
+        return !pickUps.isEmpty() || currentPickUp != null ;
     }
 
     @Override
@@ -45,16 +44,16 @@ public class BikeClass implements Bike {
 
     @Override
     public void pickDown(String finalParkID, int minutes) {
-        PickUp pickUp = pickUps.getLast();
-        pickUp.setFinalParkID(finalParkID);
-        pickUp.setMinutes(minutes);
-        pickUp.setCost();
-        isOnTheMove = false;
+        currentPickUp.setFinalParkID(finalParkID);
+        currentPickUp.setMinutes(minutes);
+        currentPickUp.setCost();
+        pickUps.addLast(currentPickUp);
+        currentPickUp = null;
     }
 
 	@Override
-	public boolean isOnTheMove() {
-		return isOnTheMove;
+	public boolean isBikeOnFirstPickUp() {
+		return pickUps.isEmpty() && currentPickUp != null;
 	}
 
 	@Override
@@ -66,5 +65,10 @@ public class BikeClass implements Bike {
 	public String getBikeLicense() {
 		return bikeLicense;
 	}
+
+    @Override
+    public boolean isOnTheMove() {
+        return  currentPickUp != null;
+    }
 
 }

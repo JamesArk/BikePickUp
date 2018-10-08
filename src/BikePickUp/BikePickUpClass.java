@@ -146,7 +146,7 @@ public class BikePickUpClass implements BikePickUp {
 			throw new BikeNotFoundException();
 		if(!bike.hasBeenUsed())
 			throw new BikeNotUsedException();
-		if(bike.isOnTheMove())
+		if(bike.isBikeOnFirstPickUp())
 			throw new BikeOnFirstPickUpException();
 		return bike.getBikePickUps();
 	}
@@ -159,7 +159,7 @@ public class BikePickUpClass implements BikePickUp {
 			throw new UserNotFoundException();
 		if(!user.hasUsedSystem())
 			throw new UserNotUsedSystemException();
-		if(user.isOnTheMove())
+		if(user.isUserIsOnFirstPickUp())
 			throw new UserOnFirstPickUpException();
 		return user.getUserPickUps();
 	}
