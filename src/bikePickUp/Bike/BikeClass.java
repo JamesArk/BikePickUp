@@ -58,8 +58,4 @@ public class BikeClass implements Bike {
 		return pickUps.iterator();
 	}
 
-	@Override
-	public String getBikeLicense() {
-		return bikeLicense;
-	}
 }

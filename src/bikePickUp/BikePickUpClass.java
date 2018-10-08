@@ -26,14 +26,14 @@ public class BikePickUpClass implements BikePickUp {
 
     @Override
     public void addUser(String userID, String nif, String email,String phone, String name, String address) throws UserAlreadyExistsException {
-        if(user != null && user.getID().equals(userID))
+        if(user != null && user.getID().equalsIgnoreCase(userID))
             throw new UserAlreadyExistsException();
         user = new UserClass(userID,nif,email,phone,name,address);
     }
 
     @Override
     public void removeUser(String idUser) throws UserNotFoundException, UserUsedSystemException {
-        if(user == null || !user.getID().equals(idUser))
+        if(user == null || !user.getID().equalsIgnoreCase(idUser))
             throw new UserNotFoundException();
         if(hasUserUsedSystem())
         	throw new UserUsedSystemException();
@@ -53,7 +53,7 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void addPark(String idPark, String name, String address) throws ParkAlreadyExistsException {
-		if(park!=null && park.getID().equals(idPark))
+		if(park!=null && park.getID().equalsIgnoreCase(idPark))
 			throw new ParkAlreadyExistsException();
 		park = new ParkClass(idPark,name,address);
 		
@@ -62,7 +62,7 @@ public class BikePickUpClass implements BikePickUp {
 	@Override
 	public void addBike(String idBike, String idPark, String bikeLicense)
 			throws BikeAlreadyExistsException, ParkNotFoundException {
-		if(bike != null && bike.getID().equals(idBike))
+		if(bike != null && bike.getID().equalsIgnoreCase(idBike))
 			throw new BikeAlreadyExistsException();
 		if(park == null || !park.getID().equals(idPark))
 			throw new ParkNotFoundException();
@@ -91,11 +91,11 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void pickUp(String idBike, String idUser) throws BikeNotFoundException,BikeOnTheMoveException,UserNotFoundException,UserOnTheMoveException,InsufficientBalanceException {
-    	if(bike == null  || !bike.getID().equals(idBike))
+    	if(bike == null  || !bike.getID().equalsIgnoreCase(idBike))
     		throw new BikeNotFoundException();
     	if(bike.isOnTheMove())
     		throw new BikeOnTheMoveException();
-    	if(user == null || !user.getID().equals(idUser))
+    	if(user == null || !user.getID().equalsIgnoreCase(idUser))
     		throw new UserNotFoundException();
     	if(user.isOnTheMove())
     		throw new UserOnTheMoveException();
@@ -110,11 +110,11 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
-    	if(bike == null || !bike.getID().equals(idBike))
+    	if(bike == null || !bike.getID().equalsIgnoreCase(idBike))
     		throw new BikeNotFoundException();
     	if(!bike.isOnTheMove())
     		throw new BikeStoppedException();
-    	if(!park.getID().equals(finalParkID))
+    	if(!park.getID().equalsIgnoreCase(finalParkID))
     		throw new ParkNotFoundException();
     	if(minutes <= 0)
     		throw new InvalidDataException();
@@ -128,7 +128,7 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void chargeUser(String idUser, int value) throws UserNotFoundException, InvalidDataException {
-		if(user == null || !user.getID().equals(idUser))
+		if(user == null || !user.getID().equalsIgnoreCase(idUser))
 			throw new UserNotFoundException();
 		if(value <= 0)
 			throw new InvalidDataException();
@@ -175,9 +175,9 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void isBikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
-		if(bike == null || !bike.getID().equals(idBike))
+		if(bike == null || !bike.getID().equalsIgnoreCase(idBike))
 			throw new BikeNotFoundException();
-		if(park == null || !park.getID().equals(idPark))
+		if(park == null || !park.getID().equalsIgnoreCase(idPark))
 			throw new ParkNotFoundException();
 		if(!park.isBikeInPark())
 			throw new BikeNotInParkException();
