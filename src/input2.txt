@@ -29,7 +29,7 @@ pickdown b1 p1 23
 
 pickup b1 u1
 
-pickdown b1 p1 37
+pickdown b1 p1 30
 
 pickdown b2 p1 29
 
@@ -79,7 +79,7 @@ getParkInfo p1
 
 pickdown b1 p2 30
 
-pickdown b1 p1 61
+pickdown b1 p1 21
 
 parkedbike b1 p1
 
@@ -97,11 +97,11 @@ pickdown b1 p1 20
 
 pickup b1 u1
 
-pickdown b1 p1 123
+pickdown b1 p1 23
 
 pickup b1 u1
 
-pickdown b1 p1 140
+pickdown b1 p1 40
 
 PickUp b1 u1
 
