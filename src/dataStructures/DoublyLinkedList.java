@@ -327,10 +327,22 @@ public class DoublyLinkedList<E> implements List<E>
      */
     public void append( DoublyLinkedList<E> list )
     {
-        //TODO: Left as an exercise.
+
+       if(this.isEmpty()) {
+           head = list.head;
+           tail = list.tail;
+           currentSize = list.currentSize;
+       }
+       if(!list.isEmpty()) {
+           currentSize += list.currentSize;
+           list.head.setPrevious(tail);
+           tail.setNext(list.head);
+           tail = list.tail;
+           list.head = null;
+           list.tail = null;
+           list.currentSize = 0;
+       }
     }
-
-
 }   
 
 

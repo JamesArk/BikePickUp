@@ -22,6 +22,5 @@ public interface Bike extends Serializable {
 	
 	String getBikeLicense();
 
-
 	boolean isOnTheMove();
 }
