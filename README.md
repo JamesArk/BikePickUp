@@ -1,1 +1,0 @@
-bikePickUp.BikePickUpClass

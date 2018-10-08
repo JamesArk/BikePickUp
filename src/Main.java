@@ -401,7 +401,6 @@ public class Main {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static BikePickUp load() {
         try{
             ObjectInputStream file  = new ObjectInputStream(new FileInputStream(DATA_FILE));
@@ -409,7 +408,7 @@ public class Main {
             file.close();
             return bpu;
         } catch(IOException e){
-            System.out.println("load not right.");
+        	
         }
         catch(ClassNotFoundException e){
             System.out.println("Corrupted file");
