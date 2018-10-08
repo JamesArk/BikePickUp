@@ -111,7 +111,7 @@ public class BikePickUpClass implements BikePickUp {
     		throw new BikeNotFoundException();
     	if(!bike.isOnTheMove())
     		throw new BikeStoppedException();
-    	if(!park.getID().equalsIgnoreCase(finalParkID))
+    	if(parkNotFound(finalParkID))
     		throw new ParkNotFoundException();
     	if(minutes <= 0)
     		throw new InvalidDataException();
@@ -204,7 +204,7 @@ public class BikePickUpClass implements BikePickUp {
     }
 
     private boolean parkNotFound(String idPark) {
-        return park == null || !park.getID().equals(idPark);
+        return park == null || !park.getID().equalsIgnoreCase(idPark);
     }
 
     private boolean bikeNotFound(String bikeID) {
