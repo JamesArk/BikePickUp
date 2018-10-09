@@ -95,8 +95,5 @@ public class PickUpClass implements PickUp{
 		return cost;
 	}
 
-    @Override
-    public boolean isThereTardiness() {
-        return cost != 0;
-    }
+
 }

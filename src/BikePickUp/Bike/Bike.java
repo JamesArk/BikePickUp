@@ -8,18 +8,19 @@ import java.io.Serializable;
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
+ * A bike registered in the system
  */
 public interface Bike extends Serializable {
 
 	/**
-	 * 
+	 * Return bike's identification
 	 * @return bike's identification
 	 */
 	String getID();
 
     /**
-     * Creates a new incomplete pickup
-     * @param pickUp - the pick to be added
+     * Adds a new incomplete pickup
+     * @param pickUp - the pickup to be added
      */
 	void pickUp(PickUp pickUp);
 

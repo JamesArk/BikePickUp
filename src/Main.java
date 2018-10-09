@@ -14,8 +14,14 @@ import java.util.Scanner;
 public class Main {
 
 
+    /**
+     * Saved data name
+     */
     private static final String DATA_FILE = "storedBikePickUp.data";
 
+    /**
+     * Output Messages
+     */
     private enum Message{
         ADD_USER_SUCCESS("Insercao de utilizador com sucesso."),
         USER_ALREADY_EXISTS("Utilizador existente."),
@@ -56,7 +62,10 @@ public class Main {
         }
 
     }
-    
+
+    /**
+     * String formatter
+     */
     private enum Formatter {
 
     	USER_PARK_INFO_FORMATTER_2("%s, "),
@@ -71,6 +80,9 @@ public class Main {
     	}
     }
 
+    /**
+     * Commands
+     */
     private enum Command{
         ADDUSER, REMOVEUSER, GETUSERINFO, ADDPARK,
         ADDBIKE, REMOVEBIKE, GETPARKINFO, PICKUP,
@@ -78,6 +90,10 @@ public class Main {
         PARKEDBIKE, LISTDELAYED, FAVORITEPARKS,XS,UNKNOWN
     }
 
+    /**
+     * Main program
+     * @param args
+     */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         BikePickUp bpu = load();
@@ -85,6 +101,11 @@ public class Main {
 
     }
 
+    /**
+     * Initializes program
+     * @param in Scanner
+     * @param bpu program's system object
+     */
     private static void initializeProgramme(Scanner in, BikePickUp bpu) {
         Command command;
         do {
@@ -146,6 +167,11 @@ public class Main {
         in.close();
     }
 
+    /**
+     * Obtains the next command
+     * @param in Scanner
+     * @return next Command
+     */
     private static Command getCommand(Scanner in) {
         try {
             return Command.valueOf(in.next().trim().toUpperCase());
@@ -154,6 +180,11 @@ public class Main {
         }
     }
 
+    /**
+     * AddUser Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void addUserCommand(Scanner in, BikePickUp bpu) {
         String userID = in.next().trim();
         String NIF = in.next().trim();
@@ -170,6 +201,11 @@ public class Main {
         }
     }
 
+    /**
+     * RemoveUser Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void removeUser(Scanner in, BikePickUp bpu) {
         String idUser = in.nextLine().trim();
 
@@ -183,6 +219,11 @@ public class Main {
         }
     }
 
+    /**
+     * GetUserInfo Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void getUserInfo(Scanner in,BikePickUp bpu) {
         String userID = in.nextLine().trim();
         try {
@@ -198,7 +239,12 @@ public class Main {
         	System.out.println(Message.USER_NOT_FOUND.msg);
         }  
     }
-    
+
+    /**
+     * AddPark Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void addPark(Scanner in, BikePickUp bpu) {
     	String idPark = in.next().trim();
     	String name = in.nextLine().trim();
@@ -211,7 +257,12 @@ public class Main {
     		System.out.println(Message.PARK_ALREADY_EXISTS.msg);
     	}
     }
-    
+
+    /**
+     * AddBike Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void addBike(Scanner in,BikePickUp bpu) {
     	String bikeID = in.next().trim();
     	String parkID = in.next().trim();
@@ -226,7 +277,12 @@ public class Main {
     		System.out.println(Message.PARK_NOT_FOUND.msg);
     	}
     }
-    
+
+    /**
+     * RemoveBike Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void removeBike(Scanner in,BikePickUp bpu) {
     	String bikeID = in.nextLine().trim();
     	
@@ -239,7 +295,12 @@ public class Main {
     		System.out.println(Message.USED_BIKE.msg);
     	}
     }
-    
+
+    /**
+     * GetParkInfo Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void getParkInfo(Scanner in,BikePickUp bpu) {
     	String parkID = in.nextLine().trim();
     	try {
@@ -256,6 +317,11 @@ public class Main {
     	}
     }
 
+    /**
+     * PickUp Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void pickUp(Scanner in, BikePickUp bpu) {
         String idBike = in.next().trim();
         String idUser = in.nextLine().trim();
@@ -275,6 +341,11 @@ public class Main {
         }
     }
 
+    /**
+     * PickDown Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void pickDown(Scanner in,BikePickUp bpu) {
         String idBike = in.next().trim();
         String idPark = in.next().trim();
@@ -294,6 +365,11 @@ public class Main {
         }
     }
 
+    /**
+     * ChargeUser Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void chargeUser(Scanner in,BikePickUp bpu) {
         String idUser = in.next().trim();
         int value = in.nextInt();
@@ -307,7 +383,12 @@ public class Main {
             System.out.println(Message.INVALID_DATA.msg);
         }
     }
-    
+
+    /**
+     * BikePickUps Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void bikePickUps(Scanner in,BikePickUp bpu) {
     	String idBike = in.nextLine().trim();
     	try {
@@ -325,7 +406,12 @@ public class Main {
     		System.out.println(Message.BIKE_ON_FIRST_PICK_UP.msg);
     	}
     }
-    
+
+    /**
+     * UserPickUps Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void userPickUps(Scanner in,BikePickUp bpu) {
     	String idUser = in.nextLine().trim();
     	try {
@@ -343,7 +429,12 @@ public class Main {
     		System.out.println(Message.USER_ON_FIRST_PICKUP.msg);
     	}
     }
-    
+
+    /**
+     * ParkedBike Command
+     * @param in Scanner
+     * @param bpu BikePickUp application
+     */
     private static void parkedBike(Scanner in, BikePickUp bpu) {
     	String idBike = in.next().trim();
     	String idPark = in.nextLine().trim();
@@ -359,6 +450,10 @@ public class Main {
     	}
     }
 
+    /**
+     * ListDelayed Command
+     * @param bpu BikePickUp application
+     */
     private static void listDelayed(BikePickUp bpu) {
         try{
             Iterator<String> list = bpu.listDelayed();
@@ -374,6 +469,10 @@ public class Main {
         }
     }
 
+    /**
+     * FavouriteParks Command
+     * @param bpu BikePickUp application
+     */
     private static void favouriteParks(BikePickUp bpu) {
         try {
             String msg = "";
@@ -389,6 +488,10 @@ public class Main {
         }
     }
 
+    /**
+     * Saves all the data of the BikePickUp application
+     * @param bpu BikePickUp application
+     */
     private static void save(BikePickUp bpu) {
         try {
             System.out.println(Message.EXIT.msg);
@@ -401,6 +504,10 @@ public class Main {
         }
     }
 
+    /**
+     * Loads the data to the BikePickUp application, if the file is not found creates a new one
+     * @return BikePickUp application
+     */
     private static BikePickUp load() {
         try{
             ObjectInputStream file  = new ObjectInputStream(new FileInputStream(DATA_FILE));

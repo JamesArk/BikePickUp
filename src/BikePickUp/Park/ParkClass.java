@@ -80,8 +80,7 @@ public class ParkClass implements Park {
 
 	@Override
 	public void pickUp() {
-		bike = null;
-		nBikes--;
+		removeBike();
 		nPickUps++;
 	}
 
