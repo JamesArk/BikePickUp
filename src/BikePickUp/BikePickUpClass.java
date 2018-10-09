@@ -2,12 +2,16 @@ package BikePickUp;
 
 import BikePickUp.Bike.*;
 import BikePickUp.Exceptions.*;
+import BikePickUp.PickUp.PickUp;
+import BikePickUp.PickUp.PickUpClass;
 import BikePickUp.Park.*;
 import BikePickUp.User.*;
 import dataStructures.Iterator;
 
-
-
+/**
+ * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
+ * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
+ */
 public class BikePickUpClass implements BikePickUp {
 
 	/**
@@ -193,7 +197,7 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
 	@Override
-	public void isBikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
+	public void bikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
 		if(bikeNotFound(idBike))
 			throw new BikeNotFoundException();
 		if(parkNotFound(idPark))

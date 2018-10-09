@@ -1,9 +1,14 @@
 package BikePickUp.Bike;
 
+import BikePickUp.PickUp.PickUp;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
 import dataStructures.List;
 
+/**
+ * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
+ * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
+ */
 public class BikeClass implements Bike {
 
     /**

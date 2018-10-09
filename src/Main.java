@@ -1,4 +1,4 @@
-import BikePickUp.Bike.PickUp;
+import BikePickUp.PickUp.PickUp;
 import BikePickUp.BikePickUp;
 import BikePickUp.BikePickUpClass;
 import BikePickUp.Exceptions.*;
@@ -348,7 +348,7 @@ public class Main {
     	String idBike = in.next().trim();
     	String idPark = in.nextLine().trim();
     	try {
-    		bpu.isBikeParked(idBike, idPark);
+    		bpu.bikeParked(idBike, idPark);
     		System.out.println(Message.PARKED_BIKE_SUCCESS.msg);
     	} catch(BikeNotFoundException e) {
     		System.out.println(Message.BIKE_NOT_FOUND.msg);
