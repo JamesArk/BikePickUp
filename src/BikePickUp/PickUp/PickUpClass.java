@@ -82,9 +82,8 @@ public class PickUpClass implements PickUp,PickUpSet{
 		if(this.minutesLate() <= 0) 
 			cost = 0;
 		else {
-			while(this.minutesLate() > MINS_LATE * i) {
+			while(this.minutesLate() > MINS_LATE * i)
 				i++;
-			}
 			cost = i;
 		}
 	}
