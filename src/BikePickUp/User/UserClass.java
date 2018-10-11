@@ -2,6 +2,7 @@ package BikePickUp.User;
 
 
 import BikePickUp.PickUp.PickUp;
+import BikePickUp.PickUp.PickUpSet;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
 import dataStructures.List;
@@ -10,7 +11,7 @@ import dataStructures.List;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class UserClass implements User {
+public class UserClass implements User,UserSet {
 
     /**
      * Constant for serialization
@@ -35,7 +36,7 @@ public class UserClass implements User {
     /**
      * Unfinished pickup that is being executed.
      */
-    private PickUp currentPickUp;
+    private PickUpSet currentPickUp;
 
 
     /**
@@ -65,18 +66,6 @@ public class UserClass implements User {
         return userID;
     }
 
-	@Override
-	public Iterator<String> getUserInfo() {
-        List<String> list = new DoublyLinkedList<>();
-        list.addLast(name);
-        list.addLast(NIF);
-        list.addLast(address);
-        list.addLast(email);
-        list.addLast(phone);
-        list.addLast(Integer.toString(balance));
-        list.addLast(Integer.toString(points));
-		return list.iterator();
-	}
 
     @Override
     public int getBalance() {
@@ -84,7 +73,7 @@ public class UserClass implements User {
     }
 
     @Override
-    public void pickUp(PickUp pickUp) {
+    public void pickUp(PickUpSet pickUp) {
         currentPickUp = pickUp;
     }
 
@@ -95,13 +84,13 @@ public class UserClass implements User {
 
     @Override
     public void pickDown(String finalParkID, int minutes) {
-         currentPickUp.setFinalParkID(finalParkID);
-         currentPickUp.setMinutes(minutes);
-         currentPickUp.setCost();
-         points += currentPickUp.getCost();
-         balance-= currentPickUp.getCost();
-         pickUps.addLast(currentPickUp);
-         currentPickUp = null;
+        currentPickUp.setFinalParkID(finalParkID);
+        currentPickUp.setMinutes(minutes);
+        currentPickUp.setCost();
+        points += currentPickUp.getCost();
+        balance-= currentPickUp.getCost();
+        pickUps.addLast(currentPickUp);
+        currentPickUp = null;
     }
 
     @Override
@@ -132,5 +121,30 @@ public class UserClass implements User {
     @Override
     public boolean isOnTheMove() {
         return currentPickUp != null;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getPhone() {
+        return phone;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public String getAddress() {
+        return address;
+    }
+
+    @Override
+    public String getNIF() {
+        return NIF;
     }
 }

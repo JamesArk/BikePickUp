@@ -5,6 +5,7 @@ import BikePickUp.Exceptions.*;
 import BikePickUp.PickUp.PickUp;
 import BikePickUp.PickUp.PickUpClass;
 import BikePickUp.Park.*;
+import BikePickUp.PickUp.PickUpSet;
 import BikePickUp.User.*;
 import dataStructures.Iterator;
 
@@ -22,17 +23,17 @@ public class BikePickUpClass implements BikePickUp {
     /**
      * User of the system.
      */
-	private User user;
+	private UserSet user;
 
     /**
      * Park of the system.
      */
-	private Park park;
+	private ParkSet park;
 
     /**
      * Bike of the system.
      */
-	private Bike bike;
+	private BikeSet bike;
 
     /**
      * A user that has at least one pickup which surpassed 60 mins until dropOff (pickdown).
@@ -72,10 +73,10 @@ public class BikePickUpClass implements BikePickUp {
     }
 
 	@Override
-	public Iterator<String> getUserInfo(String idUser) throws UserNotFoundException {
+	public User getUserInfo(String idUser) throws UserNotFoundException {
 		if(userNotFound(idUser))
 			throw new UserNotFoundException();
-		return user.getUserInfo();
+		return user;
 	}
 
 	@Override
@@ -109,10 +110,10 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
     @Override
-	public Iterator<String> getParkInfo(String parkID) throws ParkNotFoundException {
+	public Park getParkInfo(String parkID) throws ParkNotFoundException {
 		if(parkNotFound(parkID))
 			throw new ParkNotFoundException();
-		return park.getParkInfo();
+		return park;
 		
 	}
 
@@ -128,7 +129,7 @@ public class BikePickUpClass implements BikePickUp {
     		throw new UserOnTheMoveException();
     	if(user.getBalance() < MIN_PICKUP_BALANCE)
     		throw new InsufficientBalanceException();
-		PickUp pickUp = new PickUpClass(idBike,idUser,bike.getParkID());
+		PickUpSet pickUp = new PickUpClass(idBike,idUser,bike.getParkID());
 		favouritePark = park;
 		user.pickUp(pickUp);
 		bike.pickUp(pickUp);
@@ -205,17 +206,17 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
     @Override
-    public Iterator<String> listDelayed() throws NoTardinessException{
+    public User listDelayed() throws NoTardinessException{
         if(!tardyUser)
             throw new NoTardinessException();
         return null;
     }
 
     @Override
-    public Iterator<String> favouriteParks() throws NoPickUpsMadeException {
+    public Park favouriteParks() throws NoPickUpsMadeException {
         if(favouritePark == null)
             throw new NoPickUpsMadeException();
-        return favouritePark.getFavouriteParkInfo();
+        return favouritePark;
     }
 
     /**

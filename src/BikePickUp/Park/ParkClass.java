@@ -7,7 +7,7 @@ import dataStructures.*;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class ParkClass implements Park {
+public class ParkClass implements Park,ParkSet {
 
 	/**
 	 * Constant for serialization
@@ -55,24 +55,6 @@ public class ParkClass implements Park {
 	}
 
 	@Override
-	public Iterator<String> getParkInfo() {
-		return getInfo(nBikes);
-	}
-
-    /**
-     *
-     * @param nBikes Total number of bikes parked in this park.
-     * @return all of the parks info in a order.
-     */
-	private Iterator<String> getInfo(int nBikes) {
-        List<String> list = new DoublyLinkedList<>();
-        list.addLast(name);
-        list.addLast(address);
-        list.addLast(Integer.toString(nBikes));
-        return list.iterator();
-    }
-
-	@Override
 	public void addBike(Bike b) {
 		this.bike = b;
 		nBikes++;
@@ -95,12 +77,27 @@ public class ParkClass implements Park {
 		return bike != null;
 	}
 
-    @Override
-    public Iterator<String> getFavouriteParkInfo() {
-		return getInfo(nPickUps);
-    }
+	@Override
+	public int getNBikes() {
+		return nBikes;
+	}
 
-    @Override
+	@Override
+	public String getAddress() {
+		return address;
+	}
+
+	@Override
+	public String getNPickUps() {
+		return Integer.toString(nPickUps);
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
     public void removeBike() {
         nBikes--;
         bike = null;

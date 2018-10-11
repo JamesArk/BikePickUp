@@ -1,14 +1,12 @@
 package BikePickUp.Park;
 
-import BikePickUp.Bike.Bike;
-import dataStructures.Iterator;
-
 import java.io.Serializable;
 
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
- * P
+ *
+ * An interface for getters only
  */
 public interface Park  extends Serializable {
 
@@ -19,42 +17,32 @@ public interface Park  extends Serializable {
 	String getID();
 
     /**
-     * Return an iterator with the details of the park
-     * @return an iterator with the details of the park
-     */
-	Iterator<String> getParkInfo();
-
-    /**
-     * Adds a bike to the park
-     * @param b - the bike to be added
-     */
-	void addBike(Bike b);
-
-    /**
-     * Removes the bike from the park
-     */
-	void pickUp();
-
-    /**
-     * Returns the bike to the park
-     * @param bike - the bike to be delivered
-     */
-	void pickDown(Bike bike);
-
-    /**
      * Returns true if the bike is in the park
      * @return true if the bike is in the park
      */
 	boolean isBikeInPark();
 
     /**
-     * Return an iterator with the details of the park
-     * @return an iterator with the details of the park
+     * Returns the number of bikes in the park.
+     * @return number of bikes.
      */
-    Iterator<String> getFavouriteParkInfo();
+	int getNBikes();
 
     /**
-     * Removes the bike from the park
+     * Returns the park's address
+     * @return park's address
      */
-	void removeBike();
+    String getAddress();
+
+    /**
+     * Returns the park's number of pickups
+     * @return park's number of pickups
+     */
+    String getNPickUps();
+
+    /**
+     * Returns the park's name
+     * @return park's name
+     */
+    String getName();
 }

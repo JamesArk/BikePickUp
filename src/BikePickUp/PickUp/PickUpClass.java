@@ -4,7 +4,7 @@ package BikePickUp.PickUp;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class PickUpClass implements PickUp{
+public class PickUpClass implements PickUp,PickUpSet{
 
 	/**
 	 * Constant for serialization
@@ -89,11 +89,9 @@ public class PickUpClass implements PickUp{
 		}
 	}
 
-
 	@Override
 	public int getCost() {
 		return cost;
 	}
-
 
 }

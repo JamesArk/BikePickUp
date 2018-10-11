@@ -5,8 +5,8 @@ import java.io.Serializable;
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
- * A pickup from the system
  *
+ * An interface for getters only
  */
 public interface PickUp extends Serializable {
 
@@ -33,22 +33,10 @@ public interface PickUp extends Serializable {
 	String getUserID();
 
     /**
-     * Set the pick's duration
-     * @param minutes - pickup's duration
-     */
-	void setMinutes(int minutes);
-
-    /**
      * Return's duration (in minutes)
      * @return duration
      */
 	int getMinutes();
-
-    /**
-     * Sets the final park identification
-     * @param finalParkID - final park identification
-     */
-	void setFinalParkID(String finalParkID);
 
     /**
      * Return final park identification
@@ -67,11 +55,6 @@ public interface PickUp extends Serializable {
      * @return the initial park identification
      */
 	String getInitialIDPark();
-
-    /**
-     * Sets the pickup's cost
-     */
-	void setCost();
 
     /**
      * Return pickup's cost

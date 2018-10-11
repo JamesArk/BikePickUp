@@ -1,6 +1,7 @@
 package BikePickUp.Bike;
 
 import BikePickUp.PickUp.PickUp;
+import BikePickUp.PickUp.PickUpSet;
 import dataStructures.DoublyLinkedList;
 import dataStructures.Iterator;
 import dataStructures.List;
@@ -9,7 +10,7 @@ import dataStructures.List;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class BikeClass implements Bike {
+public class BikeClass implements Bike,BikeSet {
 
     /**
      * Constant for serialization
@@ -29,7 +30,7 @@ public class BikeClass implements Bike {
     /**
      * Unfinished pickup that is being executed.
      */
-    private PickUp currentPickUp;
+    private PickUpSet currentPickUp;
 
     /**
      *
@@ -51,7 +52,7 @@ public class BikeClass implements Bike {
 	}
 
     @Override
-    public void pickUp(PickUp pickUp) {
+    public void pickUp(PickUpSet pickUp) {
         currentPickUp = pickUp;
     }
 

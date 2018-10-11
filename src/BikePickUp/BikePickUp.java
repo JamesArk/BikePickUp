@@ -1,8 +1,11 @@
 package BikePickUp;
 
+import BikePickUp.Park.Park;
 import BikePickUp.PickUp.PickUp;
 import BikePickUp.Exceptions.*;
+import BikePickUp.User.User;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 import java.io.Serializable;
 
@@ -40,12 +43,12 @@ public interface BikePickUp extends Serializable {
     void removeUser(String userID) throws UserNotFoundException, UserUsedSystemException;
     
     /**
-     * Obtains the information about the user
+     * Returns the user for its details.
      * @param userID - user's ID
-     * @return an iterator of strings containing details about the specified user
+     * @return the park the park which has the same ID as the one given
      * @throws UserNotFoundException - if there is no user in the system with the specified identification
      */
-    Iterator<String> getUserInfo(String userID) throws UserNotFoundException;
+     User getUserInfo(String userID) throws UserNotFoundException;
 
     /**
      * Adds a park to the system
@@ -75,12 +78,12 @@ public interface BikePickUp extends Serializable {
 	void removeBike(String bikeID) throws BikeNotFoundException, UsedBikeException ;
 
 	/**
-	 * Returns the park's details.
+	 * Returns the park for its details.
 	 * @param parkID - the park with the specified identification
-	 * @return an iterator of string s containing the information about the specified park 
+	 * @return the park which has the same ID as the one given
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 */
-	Iterator<String> getParkInfo(String parkID) throws ParkNotFoundException;
+	Park getParkInfo(String parkID) throws ParkNotFoundException;
 
 	/**
 	 * The user "picks up" the bike, creating a new incomplete pickup.
@@ -162,12 +165,12 @@ public interface BikePickUp extends Serializable {
 	 * @return an iterator of details of the users who have at least one pickup that exceeded 60 minutes of duration.
 	 * @throws NoTardinessException - if user's points are equal zero (meaning no pickups were more than 60 minutes of duration)
 	 */
-	Iterator<String> listDelayed() throws NoTardinessException;
+	User listDelayed() throws NoTardinessException;
 
 	/**
 	 * Returns the most used parks details, excluding the ones which haven't been used.
-	 * @return an iterator of details of the most used parks.
+	 * @return the only park if he has any pickups.
 	 * @throws NoPickUpsMadeException - if there are no pickups by the user
 	 */
-	Iterator<String> favouriteParks() throws NoPickUpsMadeException;
+	Park favouriteParks() throws NoPickUpsMadeException;
 }

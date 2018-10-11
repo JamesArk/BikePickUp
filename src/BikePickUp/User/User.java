@@ -2,12 +2,17 @@ package BikePickUp.User;
 
 
 import BikePickUp.PickUp.PickUp;
+import BikePickUp.PickUp.PickUpSet;
 import dataStructures.Iterator;
+import dataStructures.List;
+
 import java.io.Serializable;
 
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
+ *
+ * An interface for getters only
  */
 public interface User  extends Serializable {
 
@@ -17,11 +22,6 @@ public interface User  extends Serializable {
      */
 	String getID();
 
-    /**
-     * Returns the user's details.
-     * @return iterator with the user's details.
-     */
-    Iterator<String> getUserInfo();
 
     /**
      * Returns the user's funds
@@ -30,29 +30,10 @@ public interface User  extends Serializable {
     int getBalance();
 
     /**
-     * Adds a new incomplete pickup
-     * @param pickUp the pickup to be added
-     */
-    void pickUp(PickUp pickUp);
-
-    /**
      * Returns true if the user used the system.
      * @return true if the user used the system.
      */
     boolean hasUsedSystem();
-
-    /**
-     * Completes the current pickup by adding the final park identification and its duration
-     * @param finalParkID - final park identification
-     * @param minutes - pickup's duration
-     */
-    void pickDown(String finalParkID, int minutes);
-
-    /**
-     * Adds funds to the user
-     * @param value amount to be added.
-     */
-    void charge(int value);
 
     /**
      * Returns true if the first pick up is incomplete
@@ -83,4 +64,34 @@ public interface User  extends Serializable {
      * @return true if the user has an unfinished pickup
      */
     boolean isOnTheMove();
+
+    /**
+     * Returns the user's name
+     * @return user's name
+     */
+    String getName();
+
+    /**
+     * Returns the user's phone
+     * @return user's phone
+     */
+    String getPhone();
+
+    /**
+     * Returns the user's email
+     * @return user's email
+     */
+    String getEmail();
+
+    /**
+     * Returns the user's address
+     * @return user's address
+     */
+    String getAddress();
+
+    /**
+     * Returns the user's NIF
+     * @return user's NIF
+     */
+    String getNIF();
 }

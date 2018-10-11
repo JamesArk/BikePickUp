@@ -8,7 +8,8 @@ import java.io.Serializable;
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
- * A bike registered in the system
+ *
+ * An interface for getters only
  */
 public interface Bike extends Serializable {
 
@@ -17,12 +18,6 @@ public interface Bike extends Serializable {
 	 * @return bike's identification
 	 */
 	String getID();
-
-    /**
-     * Adds a new incomplete pickup
-     * @param pickUp - the pickup to be added
-     */
-	void pickUp(PickUp pickUp);
 
     /**
      * Returns true, if the bike has been used
@@ -35,13 +30,6 @@ public interface Bike extends Serializable {
      * @return park's identification
      */
 	String getParkID();
-
-    /**
-     * Completes the current pickup by adding the final park identification and its duration
-     * @param finalParkID - final park identification
-     * @param minutes - pickup's duration
-     */
-	void pickDown(String finalParkID, int minutes);
 
     /**
      * Return true if the first pick up is incomplete
