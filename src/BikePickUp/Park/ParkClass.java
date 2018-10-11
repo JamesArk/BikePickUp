@@ -7,7 +7,7 @@ import dataStructures.*;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class ParkClass implements Park,ParkSet {
+public class ParkClass implements ParkSet {
 
 	/**
 	 * Constant for serialization

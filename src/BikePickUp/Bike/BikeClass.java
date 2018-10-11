@@ -10,7 +10,7 @@ import dataStructures.List;
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
-public class BikeClass implements Bike,BikeSet {
+public class BikeClass implements BikeSet {
 
     /**
      * Constant for serialization
