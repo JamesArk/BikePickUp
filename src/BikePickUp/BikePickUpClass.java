@@ -37,7 +37,7 @@ public class BikePickUpClass implements BikePickUp {
     /**
      * A user that has at least one pickup which surpassed 60 mins until dropOff (pickdown).
      */
-	private User tardyUser;
+	private boolean tardyUser;
 
     /**
      * The user's favorite park
@@ -52,7 +52,7 @@ public class BikePickUpClass implements BikePickUp {
         user = null;
         park = null;
         bike = null;
-        tardyUser = null;
+        tardyUser = false;
     }
 
     @Override
@@ -146,8 +146,6 @@ public class BikePickUpClass implements BikePickUp {
     	if(minutes <= 0)
     		throw new InvalidDataException();
     	user.pickDown(finalParkID,minutes);
-    	if(user.isThereTardiness())
-    	    tardyUser = user;
     	bike.pickDown(finalParkID,minutes);
     	park.pickDown(bike);
     	
@@ -208,9 +206,9 @@ public class BikePickUpClass implements BikePickUp {
 
     @Override
     public Iterator<String> listDelayed() throws NoTardinessException{
-        if(tardyUser == null)
+        if(!tardyUser)
             throw new NoTardinessException();
-        return tardyUser.getUserInfo();
+        return null;
     }
 
     @Override
@@ -265,8 +263,8 @@ public class BikePickUpClass implements BikePickUp {
 
     /**
      * Returns true if the the value is invalid (below or equal to zero)
-     * @param value
-     * @return
+     * @param value value to be evaluated
+     * @return true if <= 0
      */
     private boolean invalidData(int value) {
         return value <= 0;
