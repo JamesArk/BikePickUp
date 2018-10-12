@@ -5,7 +5,6 @@ import BikePickUp.PickUp.PickUp;
 import BikePickUp.Exceptions.*;
 import BikePickUp.User.User;
 import dataStructures.Iterator;
-import dataStructures.List;
 
 import java.io.Serializable;
 

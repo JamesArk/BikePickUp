@@ -114,11 +114,6 @@ public class UserClass implements UserSet {
 	}
 
     @Override
-    public boolean isThereTardiness() {
-        return points > 0;
-    }
-
-    @Override
     public boolean isOnTheMove() {
         return currentPickUp != null;
     }

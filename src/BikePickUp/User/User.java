@@ -2,9 +2,7 @@ package BikePickUp.User;
 
 
 import BikePickUp.PickUp.PickUp;
-import BikePickUp.PickUp.PickUpSet;
 import dataStructures.Iterator;
-import dataStructures.List;
 
 import java.io.Serializable;
 
@@ -52,12 +50,6 @@ public interface User  extends Serializable {
      * @return user's points
      */
 	int getPoints();
-
-    /**
-     * Returns true if the user has more than zero points (has a pick up which exceeded 60 minutes of duration)
-     * @return true if the user has more than zero points
-     */
-    boolean isThereTardiness();
 
     /**
      * Returns true if the user has an incomplete pickup

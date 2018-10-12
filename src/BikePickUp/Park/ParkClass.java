@@ -1,7 +1,6 @@
 package BikePickUp.Park;
 
 import BikePickUp.Bike.Bike;
-import dataStructures.*;
 
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
