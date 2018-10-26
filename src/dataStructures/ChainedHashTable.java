@@ -81,15 +81,7 @@ public class ChainedHashTable<K extends Comparable<K>, V>
 
     @Override
     public Iterator<Entry<K,V>> iterator( ) {
-        List<Entry<K,V>> list = new DoublyLinkedList<>();
-        for (Dictionary<K, V> dictionary : table) {
-            if (!dictionary.isEmpty()) {
-                Iterator<Entry<K, V>> entryIterator = dictionary.iterator();
-                while (entryIterator.hasNext())
-                    list.addLast(entryIterator.next());
-            }
-        }
-        return list.iterator();
+        return new OrderedListIterator<>(table);
     }
 
 
