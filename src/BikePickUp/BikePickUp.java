@@ -106,7 +106,7 @@ public interface BikePickUp extends Serializable {
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 * @throws InvalidDataException - if the value is less or equal to zero
 	 */
-	void pickDown(String idBike,String idPark, int minutes) throws BikeNotFoundException, BikeStoppedException,ParkNotFoundException,InvalidDataException;
+	User pickDown(String idBike,String idPark, int minutes) throws BikeNotFoundException, BikeStoppedException,ParkNotFoundException,InvalidDataException;
 
 	/**
 	 * Adds funds to the user.
@@ -115,7 +115,7 @@ public interface BikePickUp extends Serializable {
 	 * @throws UserNotFoundException - if there is no user in the system with the specified identification
 	 * @throws InvalidDataException - if the value is less or equal to zero
 	 */
-    void chargeUser(String idUser, int value) throws  UserNotFoundException,InvalidDataException;
+    User chargeUser(String idUser, int value) throws  UserNotFoundException,InvalidDataException;
 
     /**
      * Returns all of the bike's pickups
@@ -136,18 +136,6 @@ public interface BikePickUp extends Serializable {
 	 * @throws UserOnFirstPickUpException - if the bike is on its first pickup
 	 */
 	Iterator<PickUp> getUserPickUps(String idUser) throws UserNotFoundException,UserNotUsedSystemException,UserOnFirstPickUpException;
-
-	/**
-	 * Returns the user's funds
-	 * @return the user's balance
-	 */
-	int getUserBalance();
-
-	/**
-	 * Returns the user's total points.
-	 * @return the user's points
-	 */
-	int getUserPoints();
 
 	/**
 	 * Returns an exception if the specified bike is not parked in the specified park.

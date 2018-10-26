@@ -21,7 +21,11 @@ public class UserClass implements UserSet {
     /**
      * User NIF, User name, User address, User email, User phone number, User identification
      */
-	private String NIF,name,address,email,phone, userID;
+	private String NIF;
+    private String name;
+    private String address;
+    private String email;
+    private String phone;
 
     /**
      * User balance and points.
@@ -40,30 +44,22 @@ public class UserClass implements UserSet {
 
 
     /**
-     *
-     * @param userID User identification
-     * @param NIF User NIF
+     *  @param NIF User NIF
      * @param email User email
      * @param phone User phone number
      * @param name User name
      * @param address User address
      */
-    public UserClass(String userID, String NIF, String email, String phone, String name, String address) {
+    public UserClass(String NIF, String email, String phone, String name, String address) {
         this.NIF = NIF;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.userID = userID;
         this.balance = 5;
         this.points = 0;
         this.pickUps = new DoublyLinkedList<>();
         this.currentPickUp = null;
-    }
-
-    @Override
-    public String getID() {
-        return userID;
     }
 
 

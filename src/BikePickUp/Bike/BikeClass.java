@@ -94,4 +94,9 @@ public class BikeClass implements BikeSet {
     public boolean isOnTheMove() {
         return  currentPickUp != null;
     }
+
+    @Override
+    public String getUserID() {
+        return currentPickUp.getUserID();
+    }
 }

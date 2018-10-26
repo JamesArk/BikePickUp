@@ -7,6 +7,8 @@ import BikePickUp.PickUp.PickUpClass;
 import BikePickUp.Park.*;
 import BikePickUp.PickUp.PickUpSet;
 import BikePickUp.User.*;
+import dataStructures.ChainedHashTable;
+import dataStructures.Dictionary;
 import dataStructures.Iterator;
 
 /**
@@ -20,20 +22,15 @@ public class BikePickUpClass implements BikePickUp {
 	 */
 	static final long serialVersionUID = 0L;
 
-    /**
-     * User of the system.
-     */
-	private UserSet user;
+	private Dictionary<String,UserSet> users;
+
+	private Dictionary<String,BikeSet> bikes;
+
 
     /**
      * Park of the system.
      */
 	private ParkSet park;
-
-    /**
-     * Bike of the system.
-     */
-	private BikeSet bike;
 
     /**
      * A user that has at least one pickup which surpassed 60 mins until dropOff (pickdown).
@@ -50,33 +47,33 @@ public class BikePickUpClass implements BikePickUp {
 	 * System's constructor
 	 */
     public BikePickUpClass(){
-        user = null;
         park = null;
-        bike = null;
         tardyUser = false;
+        users = new ChainedHashTable<>();
+        bikes = new ChainedHashTable<>();
     }
 
     @Override
     public void addUser(String userID, String nif, String email,String phone, String name, String address) throws UserAlreadyExistsException {
         if(!userNotFound(userID))
             throw new UserAlreadyExistsException();
-        user = new UserClass(userID,nif,email,phone,name,address);
+        users.insert(userID,new UserClass(nif,email,phone,name,address));
     }
 
     @Override
     public void removeUser(String idUser) throws UserNotFoundException, UserUsedSystemException {
         if(userNotFound(idUser))
             throw new UserNotFoundException();
-        if(hasUserUsedSystem())
+        if(hasUserUsedSystem(idUser))
         	throw new UserUsedSystemException();
-        user = null;
+        users.remove(idUser.toLowerCase());
     }
 
 	@Override
 	public User getUserInfo(String idUser) throws UserNotFoundException {
 		if(userNotFound(idUser))
 			throw new UserNotFoundException();
-		return user;
+		return users.find(idUser.toLowerCase());
 	}
 
 	@Override
@@ -94,7 +91,8 @@ public class BikePickUpClass implements BikePickUp {
 			throw new BikeAlreadyExistsException();
 		if(parkNotFound(idPark))
 			throw new ParkNotFoundException();
-		bike = new BikeClass(idBike,idPark,bikeLicense);
+		BikeSet bike = new BikeClass(idBike,idPark,bikeLicense);
+		bikes.insert(idBike,bike);
 		park.addBike(bike);
 		
 	}
@@ -103,10 +101,10 @@ public class BikePickUpClass implements BikePickUp {
 	public void removeBike(String bikeID) throws BikeNotFoundException,UsedBikeException {
 		if(bikeNotFound(bikeID))
 			throw new BikeNotFoundException();
-		if(hasBikeBeenUsed())
+		if(hasBikeBeenUsed(bikeID))
 			throw new UsedBikeException();
-		bike = null;
-		park.removeBike();
+		bikes.remove(bikeID.toLowerCase());
+		park.removeBike(bikeID.toLowerCase());
 	}
 
     @Override
@@ -114,94 +112,85 @@ public class BikePickUpClass implements BikePickUp {
 		if(parkNotFound(parkID))
 			throw new ParkNotFoundException();
 		return park;
-		
 	}
 
 	@Override
 	public void pickUp(String idBike, String idUser) throws BikeNotFoundException,BikeOnTheMoveException,UserNotFoundException,UserOnTheMoveException,InsufficientBalanceException {
     	if(bikeNotFound(idBike))
     		throw new BikeNotFoundException();
-    	if(bike.isOnTheMove())
+    	if(bikeIsOnTheMove(idBike))
     		throw new BikeOnTheMoveException();
     	if(userNotFound(idUser))
     		throw new UserNotFoundException();
-    	if(user.isOnTheMove())
+    	if(userOnTheMove(idUser))
     		throw new UserOnTheMoveException();
-    	if(user.getBalance() < MIN_PICKUP_BALANCE)
+    	if(insufficientBalance(idUser))
     		throw new InsufficientBalanceException();
-		PickUpSet pickUp = new PickUpClass(idBike,idUser,bike.getParkID());
+		PickUpSet pickUp = new PickUpClass(idBike.toLowerCase(),idUser.toLowerCase(),bikes.find(idBike).getParkID());
 		favouritePark = park;
-		user.pickUp(pickUp);
-		bike.pickUp(pickUp);
-		park.pickUp();
+		users.find(idUser.toLowerCase()).pickUp(pickUp);
+        bikes.find(idBike.toLowerCase()).pickUp(pickUp);
+		park.pickUp(idBike);
 	}
 
-	@Override
-	public void pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
+    @Override
+	public User pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
     	if(bikeNotFound(idBike))
     		throw new BikeNotFoundException();
-    	if(!bike.isOnTheMove())
+    	if(!bikeIsOnTheMove(idBike))
     		throw new BikeStoppedException();
     	if(parkNotFound(finalParkID))
     		throw new ParkNotFoundException();
-    	if(minutes <= 0)
+    	if(invalidData(minutes))
     		throw new InvalidDataException();
-    	user.pickDown(finalParkID,minutes);
-    	bike.pickDown(finalParkID,minutes);
-    	park.pickDown(bike);
-    	
+    	String userID = bikes.find(idBike.toLowerCase()).getUserID();
+    	users.find(userID).pickDown(finalParkID,minutes);
+    	bikes.find(idBike.toLowerCase()).pickDown(finalParkID,minutes);
+    	park.pickDown(bikes.find(idBike));
+    	return users.find(userID);
 	}
 
 	@Override
-	public void chargeUser(String idUser, int value) throws UserNotFoundException, InvalidDataException {
+	public User chargeUser(String idUser, int value) throws UserNotFoundException, InvalidDataException {
 		if(userNotFound(idUser))
 			throw new UserNotFoundException();
 		if(invalidData(value))
 			throw new InvalidDataException();
-		user.charge(value);
-	}
+		users.find(idUser.toLowerCase()).charge(value);
+        return users.find(idUser.toLowerCase());
+    }
 
     @Override
 	public Iterator<PickUp> getBikePickUps(String idBike) throws BikeNotFoundException, BikeNotUsedException, BikeOnFirstPickUpException {
 		if(bikeNotFound(idBike))
 			throw new BikeNotFoundException();
-		if(!bike.hasBeenUsed())
+		if(!hasBikeBeenUsed(idBike))
 			throw new BikeNotUsedException();
-		if(bike.isBikeOnFirstPickUp())
+		if(isBikeOnFirstPickUp(idBike))
 			throw new BikeOnFirstPickUpException();
-		return bike.getBikePickUps();
+        return bikes.find(idBike.toLowerCase()).getBikePickUps();
 	}
 
-	@Override
+    @Override
 	public Iterator<PickUp> getUserPickUps(String idUser)
 			throws UserNotFoundException, UserNotUsedSystemException, UserOnFirstPickUpException {
 		
 		if(userNotFound(idUser))
 			throw new UserNotFoundException();
-		if(!user.hasUsedSystem())
+		if(!hasUserUsedSystem(idUser))
 			throw new UserNotUsedSystemException();
-		if(user.isUserIsOnFirstPickUp())
+		if(isUserIsOnFirstPickUp(idUser))
 			throw new UserOnFirstPickUpException();
-		return user.getUserPickUps();
+        return users.find(idUser.toLowerCase()).getUserPickUps();
 	}
 
-	@Override
-	public int getUserBalance() {
-		return user.getBalance();
-	}
-
-	@Override
-	public int getUserPoints() {
-		return user.getPoints();
-	}
-
-	@Override
+    @Override
 	public void bikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
 		if(bikeNotFound(idBike))
 			throw new BikeNotFoundException();
 		if(parkNotFound(idPark))
 			throw new ParkNotFoundException();
-		if(!park.isBikeInPark())
+		if(!park.isBikeInPark(idBike.toLowerCase()))
 			throw new BikeNotInParkException();
 	}
 
@@ -223,8 +212,8 @@ public class BikePickUpClass implements BikePickUp {
      * Returns true if the bike has already been used.
      * @return true if bike was used.
      */
-	private boolean hasBikeBeenUsed() {
-		return bike.hasBeenUsed();
+	private boolean hasBikeBeenUsed(String idBike) {
+        return bikes.find(idBike.toLowerCase()).hasBeenUsed();
 	}
 
     /**
@@ -233,15 +222,15 @@ public class BikePickUpClass implements BikePickUp {
      * @return true if the user is not registered
      */
     private boolean userNotFound(String idUser) {
-        return user == null || !user.getID().equalsIgnoreCase(idUser);
+        return users.find(idUser.toLowerCase()) == null;
     }
 
     /**
      * Returns true if the user used the system.
      * @return true if the user used the system.
      */
-    private boolean hasUserUsedSystem() {
-        return user.hasUsedSystem();
+    private boolean hasUserUsedSystem(String userID) {
+        return users.find(userID.toLowerCase()).hasUsedSystem();
     }
 
     /**
@@ -259,7 +248,7 @@ public class BikePickUpClass implements BikePickUp {
      * @return true if bike is not registered
      */
     private boolean bikeNotFound(String bikeID) {
-        return bike == null || !bike.getID().equalsIgnoreCase(bikeID);
+        return bikes.find(bikeID.toLowerCase()) == null;
     }
 
     /**
@@ -269,5 +258,25 @@ public class BikePickUpClass implements BikePickUp {
      */
     private boolean invalidData(int value) {
         return value <= 0;
+    }
+
+    private boolean bikeIsOnTheMove(String idBike) {
+        return bikes.find(idBike.toLowerCase()).isOnTheMove();
+    }
+
+    private boolean userOnTheMove(String idUser) {
+        return users.find(idUser.toLowerCase()).isOnTheMove();
+    }
+
+    private boolean insufficientBalance(String idUser) {
+        return users.find(idUser.toLowerCase()).getBalance()< MIN_PICKUP_BALANCE;
+    }
+
+    private boolean isBikeOnFirstPickUp(String idBike) {
+        return bikes.find(idBike.toLowerCase()).isBikeOnFirstPickUp();
+    }
+
+    private boolean isUserIsOnFirstPickUp(String idUser) {
+        return users.find(idUser.toLowerCase()).isUserIsOnFirstPickUp();
     }
 }

@@ -39,7 +39,7 @@ public class ChainedHashTable<K extends Comparable<K>, V>
             table[i] = new OrderedDoubleList<>();
 
         maxSize = capacity;
-        currentSize = 0;
+        this.currentSize = 0;
     }                                      
 
 
@@ -68,14 +68,17 @@ public class ChainedHashTable<K extends Comparable<K>, V>
     public V insert( K key, V value ) {
         if ( this.isFull() )
              this.rehash();
+        currentSize++;
         return table[hash(key)].insert(key,value);
     }
 
     @Override
     public V remove( K key ) {
         Dictionary<K,V> dictionary = table[hash(key)];
-        if(!dictionary.isEmpty())
+        if(!dictionary.isEmpty()) {
+            currentSize--;
             return dictionary.remove(key);
+        }
         return null;
     }
 

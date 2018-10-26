@@ -92,7 +92,6 @@ public class OrderedDoubleList<K extends Comparable<K>,V> implements OrderedDict
             node.setPrevious(newNode);
             currentSize++;
         }
-
         return oldValue;
     }
 

@@ -54,4 +54,6 @@ public interface Bike extends Serializable {
      * @return true, if the bike has a incomplete pick up
      */
 	boolean isOnTheMove();
+
+    String getUserID();
 }

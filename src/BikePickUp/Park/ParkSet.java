@@ -12,14 +12,14 @@ public interface ParkSet extends Park {
 
     /**
      * Adds a bike to the park
-     * @param b - the bike to be added
+     * @param bike - the bike to be added
      */
-    void addBike(Bike b);
+    void addBike(Bike bike);
 
     /**
      * Removes the bike from the park
      */
-    void pickUp();
+    void pickUp(String bikeID);
 
     /**
      * Returns the bike to the park
@@ -30,5 +30,5 @@ public interface ParkSet extends Park {
     /**
      * Removes the bike from the park
      */
-    void removeBike();
+    void removeBike(String bikeID);
 }

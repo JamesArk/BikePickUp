@@ -14,12 +14,6 @@ import java.io.Serializable;
  */
 public interface User  extends Serializable {
 
-    /**
-     * Returns user's identification
-     * @return user's identification
-     */
-	String getID();
-
 
     /**
      * Returns the user's funds
