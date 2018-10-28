@@ -77,22 +77,23 @@ public class OrderedDoubleList<K extends Comparable<K>,V> implements OrderedDict
 
     @Override
     public V insert(K key, V value) {
-        Entry<K,V> entry =  new EntryClass<>(key,value);
-        DListNode<Entry<K,V>> node = findNode(key);
-        V oldValue = null;
-        if(node == null)
-            addFirst(entry);
-        else if(node.getElement().getKey().equals(key)) {
-            oldValue = node.getElement().getValue();
-            node.setElement(entry);
-        }
-        else{
-            DListNode<Entry<K,V>> newNode = new DListNode<>(entry,node.getPrevious(),node);
-            node.getPrevious().setNext(newNode);
-            node.setPrevious(newNode);
-            currentSize++;
-        }
-        return oldValue;
+    	Entry<K,V> entry = new EntryClass<>(key,value);
+    	DListNode<Entry<K,V>> node = findNode(key);
+    	V oldValue = null;
+    	if(head == null || key.compareTo(head.getElement().getKey()) < 0)
+    		addFirst(entry);
+    	else if(node == null) 
+    		addLast(entry);
+    	else if(node.getElement().getKey().equals(key)) {
+    		oldValue = node.getElement().getValue();
+    		node.setElement(entry);
+    	} else {
+    		DListNode<Entry<K,V>> newNode = new DListNode<>(entry,node.getPrevious(),node);
+    		node.getPrevious().setNext(newNode);
+    		node.setPrevious(newNode);
+    		currentSize++;
+    	}
+    	return oldValue;
     }
 
     @Override
@@ -130,6 +131,17 @@ public class OrderedDoubleList<K extends Comparable<K>,V> implements OrderedDict
         else
             head.setPrevious(newNode);
         head = newNode;
+        currentSize++;
+    }
+    
+    private void addLast( Entry<K,V> element )
+    {
+        DListNode<Entry<K,V>> newNode = new DListNode<>(element, tail, null);
+        if ( this.isEmpty() )
+            head = newNode;
+        else
+            tail.setNext(newNode);
+        tail = newNode;
         currentSize++;
     }
 

@@ -2,7 +2,12 @@ package dataStructures;
 
 public class OrderedListIterator<K,V> implements Iterator<Entry<K,V>> {
 
-    private Iterator<Entry<K,V>> listIterator;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Iterator<Entry<K,V>> listIterator;
 
     private Dictionary<K,V>[] table;
 
@@ -15,13 +20,13 @@ public class OrderedListIterator<K,V> implements Iterator<Entry<K,V>> {
 
     @Override
     public boolean hasNext() {
-        return listIterator.hasNext() || searchNextList(currentPosition) != -1;
+        return listIterator.hasNext() || searchNextList(currentPosition+1) != -1;
     }
 
     @Override
     public Entry<K,V> next() throws NoSuchElementException {
         if(!listIterator.hasNext()) {
-            currentPosition = searchNextList(currentPosition);
+            currentPosition = searchNextList(++currentPosition);
             listIterator = table[currentPosition].iterator();
         }
 
