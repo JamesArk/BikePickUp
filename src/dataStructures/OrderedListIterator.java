@@ -20,13 +20,13 @@ public class OrderedListIterator<K,V> implements Iterator<Entry<K,V>> {
 
     @Override
     public boolean hasNext() {
-        return listIterator.hasNext() || searchNextList(currentPosition+1) != -1;
+        return listIterator.hasNext() || searchNextList(currentPosition) != -1;
     }
 
     @Override
     public Entry<K,V> next() throws NoSuchElementException {
         if(!listIterator.hasNext()) {
-            currentPosition = searchNextList(++currentPosition);
+            currentPosition = searchNextList(currentPosition);
             listIterator = table[currentPosition].iterator();
         }
 
@@ -35,12 +35,12 @@ public class OrderedListIterator<K,V> implements Iterator<Entry<K,V>> {
 
     @Override
     public void rewind() {
-        currentPosition = searchNextList(0);
+        currentPosition = searchNextList(-1);
         listIterator = table[currentPosition].iterator();
     }
 
     private int searchNextList(int pos){
-        for(int i = pos; i < table.length; i++)
+        for(int i = pos+1; i < table.length; i++)
             if(!table[i].isEmpty())
                 return i;
             return -1;
