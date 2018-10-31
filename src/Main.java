@@ -29,7 +29,7 @@ public class Main {
         USER_ALREADY_EXISTS("Utilizador existente."),
         REMOVE_USER_SUCCESS("Utilizador removido com sucesso."),
         USER_NOT_FOUND("Utilizador inexistente."),
-        USER_USED_SYSTEM("Utilizador ja utilizador o sistema."),
+        USER_USED_SYSTEM("Utilizador ja utilizou o sistema."),
         ADD_PARK_SUCCESS("Parque adicionado com sucesso."),
         PARK_ALREADY_EXISTS("Parque existente."),
         ADD_BIKE_SUCCESS("Bicicleta adicionada com sucesso."),
@@ -49,7 +49,7 @@ public class Main {
         BIKE_NOT_USED("Bicicleta nao foi utilizada."),
         BIKE_ON_FIRST_PICK_UP("Bicicleta em movimento em primeiro pickup."),
         USER_NOT_USED_SYSTEM("Utilizador nao utilizou o sistema."),
-        USER_ON_FIRST_PICKUP("Utilizador em primeiro pickup."),
+        USER_ON_FIRST_PICKUP("Utilizador em primeiro PickUp."),
         PARKED_BIKE_SUCCESS("Bicicleta estacionada no parque."),
         BIKE_NOT_IN_PARK("Bicicleta nao esta em parque."),
         NO_TARDINESS("Nao se registaram atrasos."),
@@ -194,7 +194,6 @@ public class Main {
         String phone = in.next().trim();
         String name = in.nextLine().trim();
         String address = in.nextLine();
-        in.nextLine();
         try {
             bpu.addUser(userID, NIF, email, phone, name, address);
             System.out.println(Message.ADD_USER_SUCCESS.msg);
@@ -210,7 +209,7 @@ public class Main {
      */
     private static void removeUser(Scanner in, BikePickUp bpu) {
         String idUser = in.nextLine().trim();
-        in.nextLine();
+
 
         try {
             bpu.removeUser(idUser);
@@ -229,7 +228,7 @@ public class Main {
      */
     private static void getUserInfo(Scanner in,BikePickUp bpu) {
         String userID = in.nextLine().trim();
-        in.nextLine();
+
         try {
         	User user = bpu.getUserInfo(userID);
         	System.out.println(String.format(Formatter.USER_INFO_FORMATTER.formatter,user.getName(),user.getNIF(),user.getAddress(),
@@ -248,7 +247,6 @@ public class Main {
     	String idPark = in.next().trim();
     	String name = in.nextLine().trim();
     	String address = in.nextLine();
-        in.nextLine();
 
     	try {
     		bpu.addPark(idPark,name,address);
@@ -267,7 +265,7 @@ public class Main {
     	String bikeID = in.next().trim();
     	String parkID = in.next().trim();
     	String bikeLicense = in.nextLine().trim();
-        in.nextLine();
+
     	
     	try {
     		bpu.addBike(bikeID,parkID,bikeLicense);
@@ -286,7 +284,7 @@ public class Main {
      */
     private static void removeBike(Scanner in,BikePickUp bpu) {
     	String bikeID = in.nextLine().trim();
-        in.nextLine();
+
     	try {
     		bpu.removeBike(bikeID);
     		System.out.println(Message.REMOVE_BIKE_SUCCESS.msg);
@@ -304,7 +302,7 @@ public class Main {
      */
     private static void getParkInfo(Scanner in,BikePickUp bpu) {
     	String parkID = in.nextLine().trim();
-        in.nextLine();
+
     	try {
     		Park park = bpu.getParkInfo(parkID);
     		System.out.println(String.format(Formatter.PARK_INFO_FORMATTER.formatter, park.getName(),park.getAddress(),park.getNBikes()));
@@ -321,7 +319,7 @@ public class Main {
     private static void pickUp(Scanner in, BikePickUp bpu) {
         String idBike = in.next().trim();
         String idUser = in.nextLine().trim();
-        in.nextLine();
+
         try {
             bpu.pickUp(idBike,idUser);
             System.out.println(Message.PICK_UP_SUCCESS.msg);
@@ -348,7 +346,6 @@ public class Main {
         String idPark = in.next().trim();
         int minutes = in.nextInt();
         in.nextLine();
-        in.nextLine();
         try {
             User user = bpu.pickDown(idBike,idPark,minutes);
             System.out.println(String.format(Formatter.PICK_DOWN_SUCCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCCESS.msg, user.getBalance(), user.getPoints()));
@@ -372,7 +369,6 @@ public class Main {
         String idUser = in.next().trim();
         int value = in.nextInt();
         in.nextLine();
-        in.nextLine();
         try {
             User user = bpu.chargeUser(idUser,value);
             System.out.println(String.format(Formatter.USER_BALANCE_FORMATTER.formatter,Message.CHARGE_USER_SUCCESS.msg,user.getBalance()));
@@ -390,7 +386,6 @@ public class Main {
      */
     private static void bikePickUps(Scanner in,BikePickUp bpu) {
     	String idBike = in.nextLine().trim();
-        in.nextLine();
     	try {
     		Iterator<PickUp> iterator = bpu.getBikePickUps(idBike);
     		while(iterator.hasNext()) {
@@ -414,7 +409,6 @@ public class Main {
      */
     private static void userPickUps(Scanner in,BikePickUp bpu) {
     	String idUser = in.nextLine().trim();
-        in.nextLine();
     	try {
     		Iterator<PickUp> iterator = bpu.getUserPickUps(idUser);
     		while(iterator.hasNext()) {
@@ -439,7 +433,6 @@ public class Main {
     private static void parkedBike(Scanner in, BikePickUp bpu) {
     	String idBike = in.next().trim();
     	String idPark = in.nextLine().trim();
-        in.nextLine();
     	try {
     		bpu.bikeParked(idBike, idPark);
     		System.out.println(Message.PARKED_BIKE_SUCCESS.msg);
