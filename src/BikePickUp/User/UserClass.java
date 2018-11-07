@@ -19,7 +19,7 @@ public class UserClass implements UserSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * User NIF, User name, User address, User email, User phone number, User identification
+     * User NIF, User name, User address, User email, User phone number.
      */
 	private String NIF;
     private String name;

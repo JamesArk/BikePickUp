@@ -195,7 +195,7 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
     @Override
-    public User listDelayed() throws NoTardinessException{
+    public Iterator<User> listDelayed() throws NoTardinessException{
         if(!tardyUser)
             throw new NoTardinessException();
         return null;
@@ -216,9 +216,17 @@ public class BikePickUpClass implements BikePickUp {
         return bikes.find(idBike.toLowerCase()).hasBeenUsed();
 	}
 
+	/**
+	 * Returns true if the user has already used the system.
+	 * @return true if the user used the system.
+	 */
+	private boolean hasUserUsedSystem(String userID) {
+		return users.find(userID.toLowerCase()).hasUsedSystem();
+	}
+
     /**
-     *  Returns true if the user is not registered in the system.
-     * @param idUser User identification
+     * Returns true if the user is not registered in the system.
+     * @param idUser user's identification
      * @return true if the user is not registered
      */
     private boolean userNotFound(String idUser) {
@@ -226,16 +234,8 @@ public class BikePickUpClass implements BikePickUp {
     }
 
     /**
-     * Returns true if the user used the system.
-     * @return true if the user used the system.
-     */
-    private boolean hasUserUsedSystem(String userID) {
-        return users.find(userID.toLowerCase()).hasUsedSystem();
-    }
-
-    /**
      * Returns true if the park is not registered in the system.
-     * @param idPark Park identification
+     * @param idPark park's identification
      * @return true if park is not registered
      */
     private boolean parkNotFound(String idPark) {
@@ -244,11 +244,56 @@ public class BikePickUpClass implements BikePickUp {
 
     /**
      * Returns true if the bike is not registered in the system.
-     * @param bikeID Bike identification
+     * @param bikeID bike's identification
      * @return true if bike is not registered
      */
     private boolean bikeNotFound(String bikeID) {
         return bikes.find(bikeID.toLowerCase()) == null;
+    }
+
+    /**
+     * Returns true if the bike is being used.
+     * @param idBike bike's identification
+     * @return true if bike is being used.
+     */
+    private boolean bikeIsOnTheMove(String idBike) {
+        return bikes.find(idBike.toLowerCase()).isOnTheMove();
+    }
+
+    /**
+     * Returns true if the user is using a bike.
+     * @param idUser user's identification
+     * @return true if the user is using a bike.
+     */
+    private boolean userOnTheMove(String idUser) {
+        return users.find(idUser.toLowerCase()).isOnTheMove();
+    }
+
+    /**
+     * Returns true if the user has less funds than the minimum necessary to execute a PickUp.
+     * @param idUser user's identification
+     * @return true if the user has insufficient funds.
+     */
+    private boolean insufficientBalance(String idUser) {
+        return users.find(idUser.toLowerCase()).getBalance()< MIN_PICKUP_BALANCE;
+    }
+
+    /**
+     * Returns true if the bike is being used for the first time.
+     * @param idBike bike's identification
+     * @return true if the bike is being used for the first time.
+     */
+    private boolean isBikeOnFirstPickUp(String idBike) {
+        return bikes.find(idBike.toLowerCase()).isBikeOnFirstPickUp();
+    }
+
+    /**
+     * Returns true if the user is using a bike for the first time.
+     * @param idUser user's identification.
+     * @return true if the user is using a bike for the first time.
+     */
+    private boolean isUserIsOnFirstPickUp(String idUser) {
+        return users.find(idUser.toLowerCase()).isUserIsOnFirstPickUp();
     }
 
     /**
@@ -258,25 +303,5 @@ public class BikePickUpClass implements BikePickUp {
      */
     private boolean invalidData(int value) {
         return value <= 0;
-    }
-
-    private boolean bikeIsOnTheMove(String idBike) {
-        return bikes.find(idBike.toLowerCase()).isOnTheMove();
-    }
-
-    private boolean userOnTheMove(String idUser) {
-        return users.find(idUser.toLowerCase()).isOnTheMove();
-    }
-
-    private boolean insufficientBalance(String idUser) {
-        return users.find(idUser.toLowerCase()).getBalance()< MIN_PICKUP_BALANCE;
-    }
-
-    private boolean isBikeOnFirstPickUp(String idBike) {
-        return bikes.find(idBike.toLowerCase()).isBikeOnFirstPickUp();
-    }
-
-    private boolean isUserIsOnFirstPickUp(String idUser) {
-        return users.find(idUser.toLowerCase()).isUserIsOnFirstPickUp();
     }
 }

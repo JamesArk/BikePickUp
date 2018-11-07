@@ -29,7 +29,7 @@ public interface User  extends Serializable {
 
     /**
      * Returns true if the first pick up is incomplete
-     * @return true if the bike is on its first pick up
+     * @return true if the user is on its first pick up
      */
     boolean isUserIsOnFirstPickUp();
 

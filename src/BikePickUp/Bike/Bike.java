@@ -38,8 +38,8 @@ public interface Bike extends Serializable {
 	boolean isBikeOnFirstPickUp();
 
     /**
-     * Return an iterator with all the pick ups
-     * @return an iterator with all the pick ups
+     * Return an iterator with all the pickups
+     * @return an iterator with all the pickups
      */
 	Iterator<PickUp> getBikePickUps();
 
@@ -55,5 +55,10 @@ public interface Bike extends Serializable {
      */
 	boolean isOnTheMove();
 
+	/**
+	 * Pre : currentPickUp != null;
+     * Returns the user Of the bike's current pickup.
+	 * @return user's ID.
+	 */
     String getUserID();
 }
