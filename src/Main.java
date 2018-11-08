@@ -99,7 +99,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         BikePickUp bpu = load();
-        initializeProgramme(in,bpu);
+        initializeProgram(in,bpu);
 
     }
 
@@ -108,7 +108,7 @@ public class Main {
      * @param in Scanner
      * @param bpu program's system object
      */
-    private static void initializeProgramme(Scanner in, BikePickUp bpu) {
+    private static void initializeProgram(Scanner in, BikePickUp bpu) {
         Command command;
         do {
         	command = getCommand(in);
@@ -208,11 +208,11 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void removeUser(Scanner in, BikePickUp bpu) {
-        String idUser = in.nextLine().trim();
+        String userID = in.nextLine().trim();
 
 
         try {
-            bpu.removeUser(idUser);
+            bpu.removeUser(userID);
             System.out.println(Message.REMOVE_USER_SUCCESS.msg);
         } catch(UserNotFoundException e) {
             System.out.println(Message.USER_NOT_FOUND.msg);
@@ -244,12 +244,12 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void addPark(Scanner in, BikePickUp bpu) {
-    	String idPark = in.next().trim();
+    	String parkID = in.next().trim();
     	String name = in.nextLine().trim();
     	String address = in.nextLine();
 
     	try {
-    		bpu.addPark(idPark,name,address);
+    		bpu.addPark(parkID,name,address);
     		System.out.println(Message.ADD_PARK_SUCCESS.msg);
     	} catch(ParkAlreadyExistsException e) {
     		System.out.println(Message.PARK_ALREADY_EXISTS.msg);
@@ -317,11 +317,11 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void pickUp(Scanner in, BikePickUp bpu) {
-        String idBike = in.next().trim();
-        String idUser = in.nextLine().trim();
+        String bikeID = in.next().trim();
+        String userID = in.nextLine().trim();
 
         try {
-            bpu.pickUp(idBike,idUser);
+            bpu.pickUp(bikeID,userID);
             System.out.println(Message.PICK_UP_SUCCESS.msg);
         } catch(BikeNotFoundException e) {
             System.out.println(Message.BIKE_NOT_FOUND.msg);
@@ -342,12 +342,12 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void pickDown(Scanner in,BikePickUp bpu) {
-        String idBike = in.next().trim();
-        String idPark = in.next().trim();
+        String bikeID = in.next().trim();
+        String parkID = in.next().trim();
         int minutes = in.nextInt();
         in.nextLine();
         try {
-            User user = bpu.pickDown(idBike,idPark,minutes);
+            User user = bpu.pickDown(bikeID,parkID,minutes);
             System.out.println(String.format(Formatter.PICK_DOWN_SUCCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCCESS.msg, user.getBalance(), user.getPoints()));
         } catch(BikeNotFoundException e) {
             System.out.println(Message.BIKE_NOT_FOUND.msg);
@@ -366,11 +366,11 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void chargeUser(Scanner in,BikePickUp bpu) {
-        String idUser = in.next().trim();
+        String userID = in.next().trim();
         int value = in.nextInt();
         in.nextLine();
         try {
-            User user = bpu.chargeUser(idUser,value);
+            User user = bpu.chargeUser(userID,value);
             System.out.println(String.format(Formatter.USER_BALANCE_FORMATTER.formatter,Message.CHARGE_USER_SUCCESS.msg,user.getBalance()));
         } catch(UserNotFoundException e) {
             System.out.println(Message.USER_NOT_FOUND.msg);
@@ -385,12 +385,12 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void bikePickUps(Scanner in,BikePickUp bpu) {
-    	String idBike = in.nextLine().trim();
+    	String bikeID = in.nextLine().trim();
     	try {
-    		Iterator<PickUp> iterator = bpu.getBikePickUps(idBike);
+    		Iterator<PickUp> iterator = bpu.getBikePickUps(bikeID);
     		while(iterator.hasNext()) {
     			PickUp pickUp = iterator.next();
-    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, pickUp.getUserID(), pickUp.getInitialIDPark(),
+    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, pickUp.getUserID(), pickUp.getInitialParkID(),
     					pickUp.getFinalParkID(), pickUp.getMinutes(), pickUp.minutesLate(), pickUp.getCost()));
     		}
     	} catch(BikeNotFoundException e) {
@@ -408,12 +408,12 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void userPickUps(Scanner in,BikePickUp bpu) {
-    	String idUser = in.nextLine().trim();
+    	String userID = in.nextLine().trim();
     	try {
-    		Iterator<PickUp> iterator = bpu.getUserPickUps(idUser);
+    		Iterator<PickUp> iterator = bpu.getUserPickUps(userID);
     		while(iterator.hasNext()) {
     			PickUp p = iterator.next();
-    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, p.getBikeID(), p.getInitialIDPark(), 
+    			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, p.getBikeID(), p.getInitialParkID(),
     					p.getFinalParkID(), p.getMinutes(), p.minutesLate(), p.getCost()));
     		}
     	} catch(UserNotFoundException e) {
@@ -431,10 +431,10 @@ public class Main {
      * @param bpu BikePickUp application
      */
     private static void parkedBike(Scanner in, BikePickUp bpu) {
-    	String idBike = in.next().trim();
-    	String idPark = in.nextLine().trim();
+    	String bikeID = in.next().trim();
+    	String parkID = in.nextLine().trim();
     	try {
-    		bpu.bikeParked(idBike, idPark);
+    		bpu.bikeParked(bikeID, parkID);
     		System.out.println(Message.PARKED_BIKE_SUCCESS.msg);
     	} catch(BikeNotFoundException e) {
     		System.out.println(Message.BIKE_NOT_FOUND.msg);
@@ -452,7 +452,6 @@ public class Main {
     private static void listDelayed(BikePickUp bpu) {
         try{
             bpu.listDelayed();
-
         } catch (NoTardinessException e){
             System.out.println(Message.NO_TARDINESS.msg);
         }
@@ -472,7 +471,7 @@ public class Main {
     }
 
     /**
-     * Saves all the data of the BikePickUp application
+     * Saves all the data of the BikePickUp application into a file
      * @param bpu BikePickUp application
      */
     private static void save(BikePickUp bpu) {

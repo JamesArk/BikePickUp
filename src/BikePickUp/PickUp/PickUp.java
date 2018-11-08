@@ -54,7 +54,7 @@ public interface PickUp extends Serializable {
      * Returns the final park identification
      * @return the initial park identification
      */
-	String getInitialIDPark();
+	String getInitialParkID();
 
     /**
      * Returns pickup's cost

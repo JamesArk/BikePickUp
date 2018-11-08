@@ -51,22 +51,22 @@ public interface BikePickUp extends Serializable {
 
     /**
      * Adds a park to the system
-     * @param idPark - park's identification
+     * @param parkID - park's identification
      * @param name - park's name
      * @param address - park's address
      * @throws ParkAlreadyExistsException - if the specified park has already been registered.
      */
-	void addPark(String idPark, String name, String address) throws ParkAlreadyExistsException;
+	void addPark(String parkID, String name, String address) throws ParkAlreadyExistsException;
 
 	/**
 	 * Adds a bike to the system and to the specified park
-	 * @param idBike - bike's identification.
-	 * @param idPark - park's identification.
+	 * @param bikeID - bike's identification.
+	 * @param parkID - park's identification.
 	 * @param bikeLicense - bike's license
 	 * @throws BikeAlreadyExistsException - if the specified bike has already been registered
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 */
-	void addBike(String idBike, String idPark, String bikeLicense) throws BikeAlreadyExistsException,ParkNotFoundException;
+	void addBike(String bikeID, String parkID, String bikeLicense) throws BikeAlreadyExistsException,ParkNotFoundException;
 
 	/**
 	 * Removes the bike from the system, if no user has ever used the specified bike.
