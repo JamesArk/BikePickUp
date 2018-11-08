@@ -25,7 +25,6 @@ public class ParkClass implements ParkSet {
      */
 	private int nPickUps;
 
-
 	/**
 	 * All of the bikes parked in this park.
 	 */

@@ -62,10 +62,7 @@ public class OrderedDoubleList<K extends Comparable<K>,V> implements OrderedDict
 
     @Override
     public V find(K key) {
-        DListNode<Entry<K,V>> node = head;
-
-        while ( node != null && key.compareTo(node.getElement().getKey()) > 0)
-            node = node.getNext();
+        DListNode<Entry<K,V>> node = findNode(key);
 
         if(node == null)
             return null;

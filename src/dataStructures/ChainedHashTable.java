@@ -91,7 +91,7 @@ public class ChainedHashTable<K extends Comparable<K>, V>
 
     @SuppressWarnings("unchecked")
     private void rehash() {
-        maxSize += maxSize;
+        maxSize += maxSize/2;
         int arraySize = nextPrime((int) (1.1 * maxSize));
         Dictionary<K,V>[] newTable = (Dictionary<K,V>[]) new Dictionary[arraySize];
         for ( int i = 0; i < arraySize; i++ )

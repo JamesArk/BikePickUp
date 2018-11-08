@@ -22,10 +22,15 @@ public class BikePickUpClass implements BikePickUp {
 	 */
 	static final long serialVersionUID = 0L;
 
+	/**
+	 * All of the users in the system.
+	 */
 	private Dictionary<String,UserSet> users;
 
+    /**
+     * All of the bikes in the system.
+     */
 	private Dictionary<String,BikeSet> bikes;
-
 
     /**
      * Park of the system.
@@ -33,12 +38,12 @@ public class BikePickUpClass implements BikePickUp {
 	private ParkSet park;
 
     /**
-     * A user that has at least one pickup which surpassed 60 mins until dropOff (pickdown).
+     * True if there is at least one user that exceeded 60 in duration of a pickup.
      */
-	private boolean tardyUser;
+	private boolean isThereTardyUser;
 
     /**
-     * The user's favorite park
+     * The most popular park (Most used) among all users.
      */
 	private Park favouritePark;
 
@@ -48,7 +53,7 @@ public class BikePickUpClass implements BikePickUp {
 	 */
     public BikePickUpClass(){
         park = null;
-        tardyUser = false;
+        isThereTardyUser = false;
         users = new ChainedHashTable<>();
         bikes = new ChainedHashTable<>();
     }
@@ -196,7 +201,7 @@ public class BikePickUpClass implements BikePickUp {
 
     @Override
     public Iterator<User> listDelayed() throws NoTardinessException{
-        if(!tardyUser)
+        if(!isThereTardyUser)
             throw new NoTardinessException();
         return null;
     }

@@ -18,7 +18,7 @@ public class BikeClass implements BikeSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * Bike identification, Park identification and the bike's license.
+     * Bike's identification, park's identification and the bike's license.
      */
 	private String id, parkID,bikeLicense;
 

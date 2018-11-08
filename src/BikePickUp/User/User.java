@@ -14,7 +14,8 @@ import java.io.Serializable;
  */
 public interface User  extends Serializable {
 
-
+    int INITIAL_BALANCE = 5;
+    int INITIAL_POINTS = 0;
     /**
      * Returns the user's funds
      * @return user's balance

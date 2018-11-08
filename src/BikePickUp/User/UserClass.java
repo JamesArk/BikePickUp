@@ -19,7 +19,7 @@ public class UserClass implements UserSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * User NIF, User name, User address, User email, User phone number.
+     * User's NIF, User's name, User's address, User's email, User's phone number.
      */
 	private String NIF;
     private String name;
@@ -56,8 +56,8 @@ public class UserClass implements UserSet {
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.balance = 5;
-        this.points = 0;
+        this.balance = INITIAL_BALANCE;
+        this.points = INITIAL_POINTS;
         this.pickUps = new DoublyLinkedList<>();
         this.currentPickUp = null;
     }
