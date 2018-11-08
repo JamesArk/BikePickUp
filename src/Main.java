@@ -15,7 +15,6 @@ import java.util.Scanner;
  */
 public class Main {
 
-
     /**
      * Saved data name
      */
@@ -56,8 +55,6 @@ public class Main {
         NO_PICK_UPS_MADE("Nao foram efetuados pickups."),
         EXIT("Gravando e terminando...");
 
-
-
         private final String msg;
         Message(String msg) {
             this.msg = msg;
@@ -93,7 +90,7 @@ public class Main {
     }
 
     /**
-     * Main program
+     * Main method.
      * @param args
      */
     public static void main(String[] args) {
@@ -104,7 +101,7 @@ public class Main {
     }
 
     /**
-     * Initializes program
+     * Initializes the program.
      * @param in Scanner
      * @param bpu program's system object
      */
@@ -209,8 +206,6 @@ public class Main {
      */
     private static void removeUser(Scanner in, BikePickUp bpu) {
         String userID = in.nextLine().trim();
-
-
         try {
             bpu.removeUser(userID);
             System.out.println(Message.REMOVE_USER_SUCCESS.msg);
@@ -228,7 +223,6 @@ public class Main {
      */
     private static void getUserInfo(Scanner in,BikePickUp bpu) {
         String userID = in.nextLine().trim();
-
         try {
         	User user = bpu.getUserInfo(userID);
         	System.out.println(String.format(Formatter.USER_INFO_FORMATTER.formatter,user.getName(),user.getNIF(),user.getAddress(),
@@ -247,7 +241,6 @@ public class Main {
     	String parkID = in.next().trim();
     	String name = in.nextLine().trim();
     	String address = in.nextLine();
-
     	try {
     		bpu.addPark(parkID,name,address);
     		System.out.println(Message.ADD_PARK_SUCCESS.msg);
@@ -265,8 +258,6 @@ public class Main {
     	String bikeID = in.next().trim();
     	String parkID = in.next().trim();
     	String bikeLicense = in.nextLine().trim();
-
-    	
     	try {
     		bpu.addBike(bikeID,parkID,bikeLicense);
     		System.out.println(Message.ADD_BIKE_SUCCESS.msg);
@@ -284,7 +275,6 @@ public class Main {
      */
     private static void removeBike(Scanner in,BikePickUp bpu) {
     	String bikeID = in.nextLine().trim();
-
     	try {
     		bpu.removeBike(bikeID);
     		System.out.println(Message.REMOVE_BIKE_SUCCESS.msg);
@@ -302,7 +292,6 @@ public class Main {
      */
     private static void getParkInfo(Scanner in,BikePickUp bpu) {
     	String parkID = in.nextLine().trim();
-
     	try {
     		Park park = bpu.getParkInfo(parkID);
     		System.out.println(String.format(Formatter.PARK_INFO_FORMATTER.formatter, park.getName(),park.getAddress(),park.getNBikes()));
@@ -319,7 +308,6 @@ public class Main {
     private static void pickUp(Scanner in, BikePickUp bpu) {
         String bikeID = in.next().trim();
         String userID = in.nextLine().trim();
-
         try {
             bpu.pickUp(bikeID,userID);
             System.out.println(Message.PICK_UP_SUCCESS.msg);
@@ -344,8 +332,7 @@ public class Main {
     private static void pickDown(Scanner in,BikePickUp bpu) {
         String bikeID = in.next().trim();
         String parkID = in.next().trim();
-        int minutes = in.nextInt();
-        in.nextLine();
+        int minutes = in.nextInt();in.nextLine();
         try {
             User user = bpu.pickDown(bikeID,parkID,minutes);
             System.out.println(String.format(Formatter.PICK_DOWN_SUCCESS_FORMATTER.formatter, Message.PICK_DOWN_SUCCESS.msg, user.getBalance(), user.getPoints()));
@@ -367,8 +354,7 @@ public class Main {
      */
     private static void chargeUser(Scanner in,BikePickUp bpu) {
         String userID = in.next().trim();
-        int value = in.nextInt();
-        in.nextLine();
+        int value = in.nextInt();in.nextLine();
         try {
             User user = bpu.chargeUser(userID,value);
             System.out.println(String.format(Formatter.USER_BALANCE_FORMATTER.formatter,Message.CHARGE_USER_SUCCESS.msg,user.getBalance()));
@@ -414,7 +400,7 @@ public class Main {
     		while(iterator.hasNext()) {
     			PickUp p = iterator.next();
     			System.out.println(String.format(Formatter.BIKE_USER_PICK_UPS_FORMATTER.formatter, p.getBikeID(), p.getInitialParkID(),
-    					p.getFinalParkID(), p.getMinutes(), p.minutesLate(), p.getCost()));
+                                    p.getFinalParkID(), p.getMinutes(), p.minutesLate(), p.getCost()));
     		}
     	} catch(UserNotFoundException e) {
     		System.out.println(Message.USER_NOT_FOUND.msg);

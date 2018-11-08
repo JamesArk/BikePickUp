@@ -92,5 +92,4 @@ public class PickUpClass implements PickUp,PickUpSet{
 	public int getCost() {
 		return cost;
 	}
-
 }

@@ -47,7 +47,6 @@ public class BikePickUpClass implements BikePickUp {
      */
 	private Park favouritePark;
 
-
 	/**
 	 * System's constructor
 	 */
@@ -86,7 +85,6 @@ public class BikePickUpClass implements BikePickUp {
 		if(!parkNotFound(parkID))
 			throw new ParkAlreadyExistsException();
 		park = new ParkClass(parkID,name,address);
-		
 	}
 
 	@Override
@@ -99,7 +97,6 @@ public class BikePickUpClass implements BikePickUp {
 		BikeSet bike = new BikeClass(bikeID, parkID,bikeLicense);
 		bikes.insert(bikeID,bike);
 		park.addBike(bike);
-		
 	}
 
     @Override
@@ -179,7 +176,6 @@ public class BikePickUpClass implements BikePickUp {
     @Override
 	public Iterator<PickUp> getUserPickUps(String userID)
 			throws UserNotFoundException, UserNotUsedSystemException, UserOnFirstPickUpException {
-		
 		if(userNotFound(userID))
 			throw new UserNotFoundException();
 		if(!hasUserUsedSystem(userID))

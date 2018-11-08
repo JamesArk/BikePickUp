@@ -5,6 +5,7 @@ package BikePickUp.Exceptions;
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
 public class InvalidDataException extends RuntimeException {
+
     /**
      * Constant for serialization
      */
