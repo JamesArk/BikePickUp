@@ -1,5 +1,12 @@
 package dataStructures;
 
+/**
+ * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
+ * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
+ *
+ * @param <K> Generic Key
+ * @param <V> Generic Value
+ */
 public class OrderedListIterator<K,V> implements Iterator<Entry<K,V>> {
 
     /**

@@ -88,7 +88,9 @@ public class ChainedHashTable<K extends Comparable<K>, V>
     }
 
 
-
+    /**
+     * Creates a new table with 1.5x its size and reinserts every element the old table had.
+     */
     @SuppressWarnings("unchecked")
     private void rehash() {
         maxSize += maxSize/2;
