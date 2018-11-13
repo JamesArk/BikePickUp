@@ -44,33 +44,33 @@ public interface BikePickUp extends Serializable {
     /**
      * Returns the user for its details.
      * @param userID - user's ID
-     * @return the park the park which has the same ID as the one given
+     * @return object user.
      * @throws UserNotFoundException - if there is no user in the system with the specified identification
      */
      User getUserInfo(String userID) throws UserNotFoundException;
 
     /**
      * Adds a park to the system
-     * @param idPark - park's identification
+     * @param parkID - park's identification
      * @param name - park's name
      * @param address - park's address
      * @throws ParkAlreadyExistsException - if the specified park has already been registered.
      */
-	void addPark(String idPark, String name, String address) throws ParkAlreadyExistsException;
+	void addPark(String parkID, String name, String address) throws ParkAlreadyExistsException;
 
 	/**
 	 * Adds a bike to the system and to the specified park
-	 * @param idBike - a string that the system uses to identify the bike
-	 * @param idPark - a string that the system uses to identify the park
+	 * @param bikeID - bike's identification.
+	 * @param parkID - park's identification.
 	 * @param bikeLicense - bike's license
 	 * @throws BikeAlreadyExistsException - if the specified bike has already been registered
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 */
-	void addBike(String idBike, String idPark, String bikeLicense) throws BikeAlreadyExistsException,ParkNotFoundException;
+	void addBike(String bikeID, String parkID, String bikeLicense) throws BikeAlreadyExistsException,ParkNotFoundException;
 
 	/**
-	 * Removes the bike from the system
-	 * @param bikeID - the bike with the specified identification
+	 * Removes the bike from the system, if no user has ever used the specified bike.
+	 * @param bikeID - bike's identification.
 	 * @throws BikeNotFoundException - if there is no bike in the system with the specified identification
 	 * @throws UsedBikeException - if the user already used the specified bike (pickup)
 	 */
@@ -78,16 +78,16 @@ public interface BikePickUp extends Serializable {
 
 	/**
 	 * Returns the park for its details.
-	 * @param parkID - the park with the specified identification
-	 * @return the park which has the same ID as the one given
+	 * @param parkID - park's identification
+	 * @return object park.
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 */
 	Park getParkInfo(String parkID) throws ParkNotFoundException;
 
 	/**
 	 * The user "picks up" the bike, creating a new incomplete pickup.
-	 * @param idBike - the bike the user will pick
-	 * @param idUser - the user with the specified identification
+	 * @param idBike - the bike's identification that the user will pickup.
+	 * @param idUser - the user's identification which will execute the pickup.
 	 * @throws BikeNotFoundException - if there is no bike in the system with the specified identification
 	 * @throws BikeOnTheMoveException - if the bike hasn't completed its current pickup
 	 * @throws UserNotFoundException - if there is no user in the system with the specified identification
@@ -98,29 +98,29 @@ public interface BikePickUp extends Serializable {
 
 	/**
 	 * The user returns the bike he "picked up" to the system
-	 * @param idBike - the bike with the specified identification
-	 * @param idPark - the park with the specified identification
+	 * @param idBike - bike's identification
+	 * @param finalIdPark - park's identification that the bike will be parked in.
 	 * @param minutes - the duration of the pickup
 	 * @throws BikeNotFoundException - if there is no bike in the system with the specified identification
-	 * @throws BikeStoppedException - if the bike isn't on the move
+	 * @throws BikeStoppedException - if the bike isn't being used
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 * @throws InvalidDataException - if the value is less or equal to zero
 	 */
-	void pickDown(String idBike,String idPark, int minutes) throws BikeNotFoundException, BikeStoppedException,ParkNotFoundException,InvalidDataException;
+	User pickDown(String idBike,String finalIdPark, int minutes) throws BikeNotFoundException, BikeStoppedException,ParkNotFoundException,InvalidDataException;
 
 	/**
 	 * Adds funds to the user.
-	 * @param idUser - the user with the specified identification
-	 * @param value - the value to be added.
+	 * @param idUser - user's identification
+	 * @param value - the amount to be added.
 	 * @throws UserNotFoundException - if there is no user in the system with the specified identification
 	 * @throws InvalidDataException - if the value is less or equal to zero
 	 */
-    void chargeUser(String idUser, int value) throws  UserNotFoundException,InvalidDataException;
+    User chargeUser(String idUser, int value) throws  UserNotFoundException,InvalidDataException;
 
     /**
      * Returns all of the bike's pickups
-     * @param idBike - the bike with the specified identification
-     * @return an iterator containing information about the bike's activity
+     * @param idBike - bike's identification
+     * @return an iterator containing information about the bike's activity(completed pickups)
      * @throws BikeNotFoundException - if there is no bike in the system with the specified identification
      * @throws BikeNotUsedException - if the bike hasn't been used yet
      * @throws BikeOnFirstPickUpException - if the bike is on its first pickup
@@ -129,30 +129,18 @@ public interface BikePickUp extends Serializable {
 
 	/**
 	 * Returns all of the user's pickups
-	 * @param idUser - the user with the specified identification
-	 * @return an iterator containing information about the user's activity 
+	 * @param idUser - user's identification
+	 * @return an iterator containing information about the user's activity(completed pickups)
 	 * @throws UserNotFoundException - if there is no user in the system with the specified identification
 	 * @throws UserNotUsedSystemException - if the user hasn't "picked up" a bike yet
-	 * @throws UserOnFirstPickUpException - if the bike is on its first pickup
+	 * @throws UserOnFirstPickUpException - if the user is on its first pickup
 	 */
 	Iterator<PickUp> getUserPickUps(String idUser) throws UserNotFoundException,UserNotUsedSystemException,UserOnFirstPickUpException;
 
 	/**
-	 * Returns the user's funds
-	 * @return the user's balance
-	 */
-	int getUserBalance();
-
-	/**
-	 * Returns the user's total points.
-	 * @return the user's points
-	 */
-	int getUserPoints();
-
-	/**
 	 * Returns an exception if the specified bike is not parked in the specified park.
-	 * @param idBike - the bike with the specified identification
-	 * @param idPark - the bike with the specified identification
+	 * @param idBike - bike's identification
+	 * @param idPark - bike's identification
 	 * @throws BikeNotFoundException - if there is no bike in the system with the specified identification
 	 * @throws ParkNotFoundException - if there is no park in the system with the specified identification
 	 * @throws BikeNotInParkException - if the bike is not parked is the specified park
@@ -161,15 +149,15 @@ public interface BikePickUp extends Serializable {
 
 	/**
 	 * Returns all users that have a least one pickup that exceeded 60 minutes of duration.
-	 * @return an iterator of details of the users who have at least one pickup that exceeded 60 minutes of duration.
-	 * @throws NoTardinessException - if user's points are equal zero (meaning no pickups were more than 60 minutes of duration)
+	 * @return an iterator of users who have at least one pickup that exceeded 60 minutes of duration.
+	 * @throws NoTardinessException - if every user has zero points(meaning there were no pickups that have more than 60 minutes of duration)
 	 */
-	User listDelayed() throws NoTardinessException;
+	Iterator<User> listDelayed() throws NoTardinessException;
 
 	/**
-	 * Returns the most used parks details, excluding the ones which haven't been used.
-	 * @return the only park if he has any pickups.
-	 * @throws NoPickUpsMadeException - if there are no pickups by the user
+	 * Returns all of the parks ordered by popularity, excluding the ones which haven't been used.
+	 * @return all of the parks that have completed PickUps.
+	 * @throws NoPickUpsMadeException - if there are no PickUps made by any user.
 	 */
 	Park favouriteParks() throws NoPickUpsMadeException;
 }

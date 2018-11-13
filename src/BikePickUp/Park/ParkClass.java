@@ -1,6 +1,8 @@
 package BikePickUp.Park;
 
 import BikePickUp.Bike.Bike;
+import dataStructures.ChainedHashTable;
+import dataStructures.Dictionary;
 
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
@@ -19,19 +21,14 @@ public class ParkClass implements ParkSet {
 	private String parkID,name,address;
 
     /**
-     * Bike parked at the park
-     */
-	private Bike bike;
-
-    /**
-     * Total number of bikes parked in this park.
-     */
-	private int nBikes;
-
-    /**
      * Total number of pickups were made from this park.
      */
 	private int nPickUps;
+
+	/**
+	 * All of the bikes parked in this park.
+	 */
+	private Dictionary<String,Bike> bikes;
 
     /**
      *
@@ -43,9 +40,8 @@ public class ParkClass implements ParkSet {
         this.parkID = parkID;
         this.name = name;
         this.address = address;
-        bike = null;
-        nBikes = 0;
         nPickUps = 0;
+        bikes = new ChainedHashTable<>();
     }
 
 	@Override
@@ -55,30 +51,28 @@ public class ParkClass implements ParkSet {
 
 	@Override
 	public void addBike(Bike b) {
-		this.bike = b;
-		nBikes++;
+		bikes.insert(b.getID(),b);
 	}
 
 	@Override
-	public void pickUp() {
-		removeBike();
+	public void pickUp(String bikeID) {
+		removeBike(bikeID);
 		nPickUps++;
 	}
 
 	@Override
 	public void pickDown(Bike bike) {
-		this.bike = bike;
-		nBikes++;
+        addBike(bike);
 	}
 
 	@Override
-	public boolean isBikeInPark() {
-		return bike != null;
+	public boolean isBikeInPark(String bikeID) {
+		return bikes.find(bikeID) != null;
 	}
 
 	@Override
 	public int getNBikes() {
-		return nBikes;
+		return bikes.size();
 	}
 
 	@Override
@@ -97,8 +91,7 @@ public class ParkClass implements ParkSet {
 	}
 
 	@Override
-    public void removeBike() {
-        nBikes--;
-        bike = null;
+    public void removeBike(String bikeID) {
+        bikes.remove(bikeID);
     }
 }

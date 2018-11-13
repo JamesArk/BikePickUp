@@ -18,9 +18,9 @@ public class BikeClass implements BikeSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * Bike identification, Park identification and the bike's license.
+     * Bike's identification, park's identification and the bike's license.
      */
-	private String id, parkID,bikeLicense;
+	private String bikeID, parkID,bikeLicense;
 
     /**
      * List of all the pickups that the bike was involved.
@@ -34,12 +34,12 @@ public class BikeClass implements BikeSet {
 
     /**
      *
-     * @param id Bike identification.
+     * @param bikeID Bike identification.
      * @param parkID Park identification.
      * @param bikeLicense Bike's license.
      */
-    public BikeClass(String id, String parkID, String bikeLicense) {
-        this.id = id;
+    public BikeClass(String bikeID, String parkID, String bikeLicense) {
+        this.bikeID = bikeID;
         this.parkID = parkID;
         this.bikeLicense = bikeLicense;
         this.pickUps = new DoublyLinkedList<>();
@@ -48,7 +48,7 @@ public class BikeClass implements BikeSet {
 
 	@Override
 	public String getID() {
-		return id;
+		return bikeID;
 	}
 
     @Override
@@ -93,5 +93,10 @@ public class BikeClass implements BikeSet {
     @Override
     public boolean isOnTheMove() {
         return  currentPickUp != null;
+    }
+
+    @Override
+    public String getUserID() {
+        return currentPickUp.getUserID();
     }
 }

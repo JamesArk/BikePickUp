@@ -5,6 +5,7 @@ package BikePickUp.Exceptions;
  * @author Tiago Guerreiro (53649) tf.guerreiro@campus.fct.unl.pt
  */
 public class BikeNotFoundException extends RuntimeException {
+
 	/**
 	 * Constant for serialization
 	 */

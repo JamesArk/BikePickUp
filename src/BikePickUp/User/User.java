@@ -14,13 +14,8 @@ import java.io.Serializable;
  */
 public interface User  extends Serializable {
 
-    /**
-     * Returns user's identification
-     * @return user's identification
-     */
-	String getID();
-
-
+    int INITIAL_BALANCE = 5;
+    int INITIAL_POINTS = 0;
     /**
      * Returns the user's funds
      * @return user's balance
@@ -35,7 +30,7 @@ public interface User  extends Serializable {
 
     /**
      * Returns true if the first pick up is incomplete
-     * @return true if the bike is on its first pick up
+     * @return true if the user is on its first pick up
      */
     boolean isUserIsOnFirstPickUp();
 

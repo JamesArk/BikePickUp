@@ -1,6 +1,5 @@
 package BikePickUp.User;
 
-
 import BikePickUp.PickUp.PickUp;
 import BikePickUp.PickUp.PickUpSet;
 import dataStructures.DoublyLinkedList;
@@ -19,9 +18,13 @@ public class UserClass implements UserSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * User NIF, User name, User address, User email, User phone number, User identification
+     * User's NIF, User's name, User's address, User's email, User's phone number.
      */
-	private String NIF,name,address,email,phone, userID;
+	private String NIF;
+    private String name;
+    private String address;
+    private String email;
+    private String phone;
 
     /**
      * User balance and points.
@@ -40,30 +43,22 @@ public class UserClass implements UserSet {
 
 
     /**
-     *
-     * @param userID User identification
-     * @param NIF User NIF
+     *  @param NIF User NIF
      * @param email User email
      * @param phone User phone number
      * @param name User name
      * @param address User address
      */
-    public UserClass(String userID, String NIF, String email, String phone, String name, String address) {
+    public UserClass(String NIF, String email, String phone, String name, String address) {
         this.NIF = NIF;
         this.name = name;
         this.address = address;
         this.email = email;
         this.phone = phone;
-        this.userID = userID;
-        this.balance = 5;
-        this.points = 0;
+        this.balance = INITIAL_BALANCE;
+        this.points = INITIAL_POINTS;
         this.pickUps = new DoublyLinkedList<>();
         this.currentPickUp = null;
-    }
-
-    @Override
-    public String getID() {
-        return userID;
     }
 
 

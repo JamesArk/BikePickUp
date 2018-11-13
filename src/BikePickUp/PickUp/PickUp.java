@@ -16,48 +16,48 @@ public interface PickUp extends Serializable {
     int MAX_MINS = 60;
 
     /**
-     * For each 30 minutes the pickup's cost incresases
+     * For each 30 minutes the pickup's cost increases
      */
     int MINS_LATE = 30;
 
     /**
-     * Return bike's id
+     * Returns bike's id of this pickup
      * @return bike's id
      */
 	String getBikeID();
 
     /**
-     * Return user's id
+     * Returns user's id of this pickup
      * @return user's id
      */
 	String getUserID();
 
     /**
-     * Return's duration (in minutes)
+     * Returns duration (in minutes)
      * @return duration
      */
 	int getMinutes();
 
     /**
-     * Return final park identification
+     * Returns final park identification
      * @return final park identification
      */
 	String getFinalParkID();
 
     /**
-     * Return the minutes late
+     * Returns the minutes late
      * @return the minutes late
      */
 	int minutesLate();
 
     /**
-     * Return the final park identification
+     * Returns the final park identification
      * @return the initial park identification
      */
-	String getInitialIDPark();
+	String getInitialParkID();
 
     /**
-     * Return pickup's cost
+     * Returns pickup's cost
      * @return pickup's cost
      */
 	int getCost();

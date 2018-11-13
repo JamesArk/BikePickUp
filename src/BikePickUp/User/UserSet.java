@@ -17,14 +17,14 @@ public interface UserSet extends User {
     void pickUp(PickUpSet pickUp);
 
     /**
-     * Completes the current pickup by adding the final park identification and its duration
+     * Completes the current pickup by adding the final park identification and its duration.
      * @param finalParkID - final park identification
      * @param minutes - pickup's duration
      */
     void pickDown(String finalParkID, int minutes);
 
     /**
-     * Adds funds to the user
+     * Adds funds to the user.
      * @param value amount to be added.
      */
     void charge(int value);

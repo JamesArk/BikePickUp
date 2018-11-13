@@ -72,7 +72,7 @@ public class PickUpClass implements PickUp,PickUpSet{
     }
 
 	@Override
-	public String getInitialIDPark() {
+	public String getInitialParkID() {
 		return initialParkID;
 	}
 	
@@ -92,5 +92,4 @@ public class PickUpClass implements PickUp,PickUpSet{
 	public int getCost() {
 		return cost;
 	}
-
 }

@@ -20,7 +20,7 @@ public interface Park  extends Serializable {
      * Returns true if the bike is in the park
      * @return true if the bike is in the park
      */
-	boolean isBikeInPark();
+	boolean isBikeInPark(String bikeID);
 
     /**
      * Returns the number of bikes in the park.
