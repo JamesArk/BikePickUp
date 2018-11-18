@@ -2,7 +2,12 @@ package dataStructures;
 
 public class BSTKeyOrderIterator<K extends Comparable<K>,V> implements Iterator<Entry<K,V>> {
 
-    private Stack<BSTNode<K,V>> stack;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private Stack<BSTNode<K,V>> stack;
 
     private BSTNode<K,V> root;
 
@@ -38,7 +43,6 @@ public class BSTKeyOrderIterator<K extends Comparable<K>,V> implements Iterator<
 
     @Override
     public void rewind() {
-        BSTNode<K,V> node = root;
         stackSubTree(root);
     }
 }
