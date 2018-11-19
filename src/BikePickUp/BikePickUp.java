@@ -4,6 +4,7 @@ import BikePickUp.Park.Park;
 import BikePickUp.PickUp.PickUp;
 import BikePickUp.Exceptions.*;
 import BikePickUp.User.User;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 import java.io.Serializable;
@@ -159,5 +160,5 @@ public interface BikePickUp extends Serializable {
 	 * @return all of the parks that have completed PickUps.
 	 * @throws NoPickUpsMadeException - if there are no PickUps made by any user.
 	 */
-	Park favouriteParks() throws NoPickUpsMadeException;
+	Iterator<Entry<String,Park>> favouriteParks() throws NoPickUpsMadeException;
 }

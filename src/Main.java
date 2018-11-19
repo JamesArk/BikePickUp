@@ -4,6 +4,7 @@ import BikePickUp.BikePickUp;
 import BikePickUp.BikePickUpClass;
 import BikePickUp.Exceptions.*;
 import BikePickUp.User.User;
+import dataStructures.Entry;
 import dataStructures.Iterator;
 
 import java.io.*;
@@ -449,8 +450,11 @@ public class Main {
      */
     private static void favouriteParks(BikePickUp bpu) {
         try {
-            Park park = bpu.favouriteParks();
-            System.out.println(String.format(Formatter.PARK_INFO_FORMATTER.formatter, park.getName(),park.getAddress(),park.getNPickUps()));
+            Iterator<Entry<String,Park>> topParks = bpu.favouriteParks();
+            while(topParks.hasNext()) {
+                Park park = topParks.next().getValue();
+                System.out.println(String.format(Formatter.PARK_INFO_FORMATTER.formatter, park.getName(), park.getAddress(), park.getNPickUps()));
+            }
         } catch(NoPickUpsMadeException e) {
             System.out.println(Message.NO_PICK_UPS_MADE.msg);
         }

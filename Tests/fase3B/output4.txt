@@ -1,0 +1,306 @@
+PickUp com sucesso.
+
+Pickdown com sucesso: 24 euros, 1 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 24, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 20 euros, 2 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 24 euros, 1 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 24, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 23 euros, 2 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome13: 200000000, morada13, email13, 223313, 4, 1
+
+Saldo insuficiente.
+
+Bicicleta parada.
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome13: 200000000, morada13, email13, 223313, 4, 1
+
+Saldo: 24 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 23 euros, 2 pontos
+
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome13: 200000000, morada13, email13, 223313, 23, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 22 euros, 3 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 22, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+
+PickUp com sucesso.
+
+Bicicleta parada.
+
+Nome13: 200000000, morada13, email13, 223313, 22, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 22, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 22, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 22, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 21 euros, 4 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 21, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 20 euros, 5 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 20, 5
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 19 euros, 6 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo insuficiente.
+
+Bicicleta parada.
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 1
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo: 5 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 2 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 2
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo insuficiente.
+
+Bicicleta parada.
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome16: 200000000, morada16, email16, 223316, 4, 2
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo: 5 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 3 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 4, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo: 30 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 0 euros, 4 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 4, 1
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo: 30 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 29 euros, 2 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+Nome18: 200000000, morada18, email18, 223318, 4, 1
+
+Saldo: 30 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 29 euros, 2 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+Nome18: 200000000, morada18, email18, 223318, 29, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 28 euros, 3 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome18: 200000000, morada18, email18, 223318, 28, 3
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 27 euros, 4 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome18: 200000000, morada18, email18, 223318, 27, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 26 euros, 5 pontos
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 25 euros, 6 pontos
+
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome18: 200000000, morada18, email18, 223318, 25, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 24 euros, 7 pontos
+
+Nome18: 200000000, morada18, email18, 223318, 24, 7
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 4 euros, 1 pontos
+
+Nome18: 200000000, morada18, email18, 223318, 24, 7
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+Nome20: 200000000, morada20, email20, 223320, 4, 1
+
+Saldo insuficiente.
+
+Bicicleta parada.
+
+Nome18: 200000000, morada18, email18, 223318, 24, 7
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+Nome20: 200000000, morada20, email20, 223320, 4, 1
+
+Saldo: 15 euros
+
+PickUp com sucesso.
+
+Pickdown com sucesso: 14 euros, 2 pontos
+
+Nome18: 200000000, morada18, email18, 223318, 24, 7
+Nome13: 200000000, morada13, email13, 223313, 19, 6
+Nome16: 200000000, morada16, email16, 223316, 0, 4
+Nome11: 200000000, morada11, email11, 223311, 20, 2
+Nome12: 200000000, morada12, email12, 223312, 23, 2
+Nome17: 200000000, morada17, email17, 223317, 29, 2
+Nome20: 200000000, morada20, email20, 223320, 14, 2
+
+Gravando e terminando...
+

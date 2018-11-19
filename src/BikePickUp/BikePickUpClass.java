@@ -7,9 +7,7 @@ import BikePickUp.PickUp.PickUpClass;
 import BikePickUp.Park.*;
 import BikePickUp.PickUp.PickUpSet;
 import BikePickUp.User.*;
-import dataStructures.ChainedHashTable;
-import dataStructures.Dictionary;
-import dataStructures.Iterator;
+import dataStructures.*;
 
 /**
  * @author Goncalo Areia (52714) g.areia@campus.fct.unl.pt
@@ -43,9 +41,16 @@ public class BikePickUpClass implements BikePickUp {
 	private boolean isThereTardyUser;
 
     /**
-     * The most popular park (Most used) among all users.
+     * All of the parks with the most number of pickups.
      */
-	private Park favouritePark;
+	private OrderedDictionary<String,Park> topParks;
+
+    /**
+     * The current maximum number of pickups made in at least one park.
+     */
+	private int currentMaxPickUps;
+
+	private OrderedDictionary<Integer,List<User>> delayedUsers;
 
 	/**
 	 * System's constructor
@@ -55,6 +60,9 @@ public class BikePickUpClass implements BikePickUp {
         users = new ChainedHashTable<>();
         bikes = new ChainedHashTable<>();
         parks = new ChainedHashTable<>();
+        topParks = new BinarySearchTree<>();
+        currentMaxPickUps = 0;
+        delayedUsers = new BinarySearchTree<>();
     }
 
     @Override
@@ -133,10 +141,8 @@ public class BikePickUpClass implements BikePickUp {
     	if(insufficientBalance(userID))
     		throw new InsufficientBalanceException();
 		PickUpSet pickUp = new PickUpClass(idBike.toLowerCase(),userID.toLowerCase(),bikes.find(idBike).getParkID());
-		favouritePark = parks.find(bikes.find(idBike.toLowerCase()).getParkID());
 		users.find(userID.toLowerCase()).pickUp(pickUp);
         bikes.find(idBike.toLowerCase()).pickUp(pickUp);
-		//park.pickUp(idBike);
         parks.find(bikes.find(idBike.toLowerCase()).getParkID()).pickUp(idBike.toLowerCase());
 	}
 
@@ -152,13 +158,41 @@ public class BikePickUpClass implements BikePickUp {
     	if(invalidData(minutes))
     		throw new InvalidDataException();
     	String userID = bikes.find(idBike.toLowerCase()).getUserID();
-    	users.find(userID).pickDown(finalParkID,minutes);
+    	UserSet user = users.find(userID);
+    	int oldPoints = user.getPoints();
+    	user.pickDown(finalParkID,minutes);
     	bikes.find(idBike.toLowerCase()).pickDown(finalParkID,minutes);
     	park.pickDown(bikes.find(idBike.toLowerCase()));
+    	updateTopParks(park,Integer.parseInt(park.getNPickUps()));
+    	updateDelayedUsers(user,oldPoints);
+
     	return users.find(userID);
 	}
 
-	@Override
+    private void updateDelayedUsers(UserSet user, int oldPoints) {
+        List<User> userList = delayedUsers.find(oldPoints);
+        if(userList != null) {
+            userList.remove(user);
+            if (userList.isEmpty())
+                delayedUsers.remove(oldPoints);
+        }
+            userList = delayedUsers.find(user.getPoints());
+            if (userList == null)
+                userList = new DoublyLinkedList<>();
+        userList.addLast(user);
+        delayedUsers.insert(user.getPoints(),userList);
+    }
+
+    private void updateTopParks(Park park, int nPickups) {
+        if(nPickups > currentMaxPickUps) {
+            topParks = new BinarySearchTree<>();
+            currentMaxPickUps = nPickups;
+        }
+        else if(nPickups == currentMaxPickUps)
+            topParks.insert(park.getName(),park);
+    }
+
+    @Override
 	public User chargeUser(String userID, int value) throws UserNotFoundException, InvalidDataException {
 		if(userNotFound(userID))
 			throw new UserNotFoundException();
@@ -210,10 +244,10 @@ public class BikePickUpClass implements BikePickUp {
     }
 
     @Override
-    public Park favouriteParks() throws NoPickUpsMadeException {
-        if(favouritePark == null)
+    public Iterator<Entry<String, Park>> favouriteParks() throws NoPickUpsMadeException {
+        if(topParks.isEmpty())
             throw new NoPickUpsMadeException();
-        return favouritePark;
+        return topParks.iterator();
     }
 
     /**
