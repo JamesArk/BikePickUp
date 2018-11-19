@@ -31,11 +31,6 @@ public class BikePickUpClass implements BikePickUp {
      * All of the bikes in the system.
      */
 	private Dictionary<String,BikeSet> bikes;
-
-    /**
-     * Park of the system.
-     */
-	private ParkSet park;
 	
 	/**
 	 * All the parks in the system.
@@ -56,7 +51,6 @@ public class BikePickUpClass implements BikePickUp {
 	 * System's constructor
 	 */
     public BikePickUpClass(){
-        park = null;
         isThereTardyUser = false;
         users = new ChainedHashTable<>();
         bikes = new ChainedHashTable<>();
@@ -88,23 +82,24 @@ public class BikePickUpClass implements BikePickUp {
 
 	@Override
 	public void addPark(String parkID, String name, String address) throws ParkAlreadyExistsException {
-		if(!parkNotFound(parkID))
+		ParkSet park = parks.find(parkID.toLowerCase());
+        if(!parkNotFound(park))
 			throw new ParkAlreadyExistsException();
-		ParkSet park = new ParkClass(parkID,name,address);
+		park = new ParkClass(parkID,name,address);
 		parks.insert(parkID, park);
 	}
 
 	@Override
 	public void addBike(String bikeID, String parkID, String bikeLicense)
 			throws BikeAlreadyExistsException, ParkNotFoundException {
-		if(!bikeNotFound(bikeID))
+		ParkSet park = parks.find(parkID.toLowerCase());
+        if(!bikeNotFound(bikeID))
 			throw new BikeAlreadyExistsException();
-		if(parkNotFound(parkID))
+		if(parkNotFound(park))
 			throw new ParkNotFoundException();
 		BikeSet bike = new BikeClass(bikeID, parkID,bikeLicense);
 		bikes.insert(bikeID,bike);
-		//park.addBike(bike);
-		parks.find(parkID.toLowerCase()).addBike(bike);
+		park.addBike(bike);
 	}
 
     @Override
@@ -113,18 +108,16 @@ public class BikePickUpClass implements BikePickUp {
 			throw new BikeNotFoundException();
 		if(hasBikeBeenUsed(bikeID))
 			throw new UsedBikeException();
-		parks.find(bikes.find(bikeID.toLowerCase()).getParkID()).removeBike(bikeID.toLowerCase());
-		bikes.remove(bikeID.toLowerCase());
-		//park.removeBike(bikeID.toLowerCase());
-		
+		parks.find(bikes.remove(bikeID.toLowerCase()).getParkID().toLowerCase()).removeBike(bikeID.toLowerCase());
 	}
 
     @Override
 	public Park getParkInfo(String parkID) throws ParkNotFoundException {
-		if(parkNotFound(parkID))
+        ParkSet park = parks.find(parkID.toLowerCase());
+        if(parkNotFound(park))
 			throw new ParkNotFoundException();
-		//return park;
-		return parks.find(parkID.toLowerCase());
+
+		return park;
 	}
 
 	@Override
@@ -149,19 +142,19 @@ public class BikePickUpClass implements BikePickUp {
 
     @Override
 	public User pickDown(String idBike, String finalParkID, int minutes) throws BikeNotFoundException, BikeStoppedException, ParkNotFoundException, InvalidDataException {
-    	if(bikeNotFound(idBike))
+    	ParkSet park  = parks.find(finalParkID.toLowerCase());
+        if(bikeNotFound(idBike))
     		throw new BikeNotFoundException();
     	if(!bikeIsOnTheMove(idBike))
     		throw new BikeStoppedException();
-    	if(parkNotFound(finalParkID))
+    	if(parkNotFound(park))
     		throw new ParkNotFoundException();
     	if(invalidData(minutes))
     		throw new InvalidDataException();
     	String userID = bikes.find(idBike.toLowerCase()).getUserID();
     	users.find(userID).pickDown(finalParkID,minutes);
     	bikes.find(idBike.toLowerCase()).pickDown(finalParkID,minutes);
-    	//park.pickDown(bikes.find(idBike));
-    	parks.find(finalParkID.toLowerCase()).pickDown(bikes.find(idBike));
+    	park.pickDown(bikes.find(idBike.toLowerCase()));
     	return users.find(userID);
 	}
 
@@ -200,12 +193,12 @@ public class BikePickUpClass implements BikePickUp {
 
     @Override
 	public void bikeParked(String idBike, String idPark) throws BikeNotFoundException, ParkNotFoundException, BikeNotInParkException {
-		if(bikeNotFound(idBike))
+		ParkSet park = parks.find(idPark.toLowerCase());
+        if(bikeNotFound(idBike))
 			throw new BikeNotFoundException();
-		if(parkNotFound(idPark))
+		if(parkNotFound(park))
 			throw new ParkNotFoundException();
-		//if(!park.isBikeInPark(idBike.toLowerCase()))
-		if(!parks.find(idPark.toLowerCase()).isBikeInPark(idBike.toLowerCase()))
+		if(!park.isBikeInPark(idBike.toLowerCase()))
 			throw new BikeNotInParkException();
 	}
 
@@ -250,12 +243,11 @@ public class BikePickUpClass implements BikePickUp {
 
     /**
      * Returns true if the park is not registered in the system.
-     * @param idPark park's identification
+     * @param park park's identification
      * @return true if park is not registered
      */
-    private boolean parkNotFound(String idPark) {
-        //return park == null || !park.getID().equalsIgnoreCase(idPark);
-    	return parks.find(idPark.toLowerCase()) == null;
+    private boolean parkNotFound(ParkSet park) {
+    	return park == null;
     }
 
     /**
