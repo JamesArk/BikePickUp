@@ -82,7 +82,8 @@ public class UserClass implements UserSet {
         currentPickUp.setFinalParkID(finalParkID);
         currentPickUp.setMinutes(minutes);
         currentPickUp.setCost();
-        points += currentPickUp.getCost();
+        if(currentPickUp.getCost() > 0)
+        	points++;
         balance-= currentPickUp.getCost();
         pickUps.addLast(currentPickUp);
         currentPickUp = null;

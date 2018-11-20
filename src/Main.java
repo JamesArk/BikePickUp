@@ -6,6 +6,7 @@ import BikePickUp.Exceptions.*;
 import BikePickUp.User.User;
 import dataStructures.Entry;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 import java.io.*;
 import java.util.Scanner;
@@ -438,7 +439,16 @@ public class Main {
      */
     private static void listDelayed(BikePickUp bpu) {
         try{
-            bpu.listDelayed();
+            Iterator<Entry<Integer,List<User>>> it = bpu.listDelayed();
+            while(it.hasNext()) {
+            	List<User> list = it.next().getValue();
+            	Iterator<User> users = list.iterator();
+            	while(users.hasNext()) {
+            		User user = users.next();
+            		System.out.println(String.format(Formatter.USER_INFO_FORMATTER.formatter,user.getName(),user.getNIF(),user.getAddress(),
+                            user.getEmail(),user.getPhone(),Integer.toString(user.getBalance()),user.getPoints()));
+            	}
+            }
         } catch (NoTardinessException e){
             System.out.println(Message.NO_TARDINESS.msg);
         }

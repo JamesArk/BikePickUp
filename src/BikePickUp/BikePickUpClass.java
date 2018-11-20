@@ -170,23 +170,28 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
     private void updateDelayedUsers(UserSet user, int oldPoints) {
-        List<User> userList = delayedUsers.find(oldPoints);
-        if(userList != null) {
-            userList.remove(user);
-            if (userList.isEmpty())
-                delayedUsers.remove(oldPoints);
-        }
-            userList = delayedUsers.find(user.getPoints());
-            if (userList == null)
-                userList = new DoublyLinkedList<>();
+    	List<User> userList;
+    	if(oldPoints < user.getPoints()) {
+    		userList = delayedUsers.find(-oldPoints);
+    		if(userList != null) {
+    			userList.remove(user);
+    			if (userList.isEmpty())
+    				delayedUsers.remove(-oldPoints);
+    		}
+    	
+        userList = delayedUsers.find(-user.getPoints());
+        if (userList == null)
+        	userList = new DoublyLinkedList<>();
         userList.addLast(user);
-        delayedUsers.insert(user.getPoints(),userList);
+        delayedUsers.insert(-user.getPoints(),userList);
+    	}
     }
 
     private void updateTopParks(Park park, int nPickups) {
         if(nPickups > currentMaxPickUps) {
             topParks = new BinarySearchTree<>();
             currentMaxPickUps = nPickups;
+            topParks.insert(park.getName(), park);
         }
         else if(nPickups == currentMaxPickUps)
             topParks.insert(park.getName(),park);
@@ -237,10 +242,10 @@ public class BikePickUpClass implements BikePickUp {
 	}
 
     @Override
-    public Iterator<User> listDelayed() throws NoTardinessException{
-        if(!isThereTardyUser)
+    public Iterator<Entry<Integer,List<User>>> listDelayed() throws NoTardinessException{
+        if(delayedUsers.isEmpty())
             throw new NoTardinessException();
-        return null;
+        return delayedUsers.iterator();
     }
 
     @Override
