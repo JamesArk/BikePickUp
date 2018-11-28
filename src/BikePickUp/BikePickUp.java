@@ -4,7 +4,9 @@ import BikePickUp.Park.Park;
 import BikePickUp.PickUp.PickUp;
 import BikePickUp.Exceptions.*;
 import BikePickUp.User.User;
+import dataStructures.Entry;
 import dataStructures.Iterator;
+import dataStructures.List;
 
 import java.io.Serializable;
 
@@ -152,12 +154,12 @@ public interface BikePickUp extends Serializable {
 	 * @return an iterator of users who have at least one pickup that exceeded 60 minutes of duration.
 	 * @throws NoTardinessException - if every user has zero points(meaning there were no pickups that have more than 60 minutes of duration)
 	 */
-	Iterator<User> listDelayed() throws NoTardinessException;
+	Iterator<Entry<Integer,List<User>>> listDelayed() throws NoTardinessException;
 
 	/**
 	 * Returns all of the parks ordered by popularity, excluding the ones which haven't been used.
 	 * @return all of the parks that have completed PickUps.
 	 * @throws NoPickUpsMadeException - if there are no PickUps made by any user.
 	 */
-	Park favouriteParks() throws NoPickUpsMadeException;
+	Iterator<Entry<String,Park>> favouriteParks() throws NoPickUpsMadeException;
 }

@@ -1,0 +1,58 @@
+pickup b1 u1
+
+pickdown b1 p1 30
+
+RemoveUser u1
+
+GetUserInfo u1
+
+RemoveBike b1
+
+GetParkInfo p1
+
+addPark p1 Biclas da costa
+rua das acacias 15, COSTA DE CAPARICA
+
+AddBike b1 p1 13-xx-14
+
+pickup b1 u1
+
+removebike b1
+
+pickdown b1 p1 2
+
+adduser u1 200000000 joao@emcasa.pt 212900000 joao luis
+rua das acacias 19, costa de caparica
+
+adduser u1 211111111 luis@notrabalho.uk 966666666 luisa castro
+rua movimentada 12 2o andar, Almada
+
+pickup b1 u1
+
+GETUSERINFO U1
+
+removeuser u1
+
+getuserinfo u1 
+
+adduser u1 200000000 joao@emcasa.pt 212900000 joao luis
+rua das acacias 19, Costa de Caparica
+
+GetUserInfo u1
+
+addPark p1 Biclas da costa
+rua das acacias 15, COSTA DE CAPARICA
+
+favoriteparks
+
+pickup b1 u1
+
+addbike b1 p2 13-xx-14
+
+addBIKE b1 p1 13-xx-14
+
+addBIKE b1 p1 13-xx-14
+
+listDelayed
+
+XS

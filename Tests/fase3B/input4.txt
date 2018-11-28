@@ -1,0 +1,194 @@
+pickup bike20 user11
+
+pickdown bike20 p1 65
+
+listDelayed
+
+pickup bike21 user11
+
+pickdown bike21 p1 180
+
+listDelayed
+
+pickup bike21 user12
+
+pickdown bike21 p1 62
+
+listDelayed
+
+pickup bike22 user12
+
+pickdown bike22 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+chargeuser user13 20
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike25 user15
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user16
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user17
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user18
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike23 user13
+
+pickdown bike23 p1 62
+
+listDelayed
+
+pickup bike27 user16
+
+pickdown bike27 p1 63
+
+listDelayed
+
+chargeuser user16 1
+
+pickup bike27 user16
+
+pickdown bike27 p1 64
+
+listdelayed
+
+pickup bike27 User16
+
+pickdown bike27 p1 65
+
+listDelayed
+
+chargeuser user16 1
+
+pickup bike27 user16
+
+pickdown bike27 p1 62
+
+listDelayed
+
+chargeuser user16 26
+
+pickup bike27 user16
+
+pickdown bike27 p1 931
+
+listDelayed
+
+chargeuser user17 26
+
+pickup bike30 user17
+
+pickdown bike30 p1 61
+
+listDelayed
+
+chargeuser user18 26
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user18
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user20
+
+pickdown bike30 p1 61
+
+listDelayed
+
+pickup bike30 user20
+
+pickdown bike30 p1 61
+
+listDelayed
+
+chargeuser user20 11
+
+pickup bike30 user20
+
+pickdown bike30 p1 61
+
+listdelayed
+
+xs
+

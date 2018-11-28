@@ -11,12 +11,6 @@ import java.io.Serializable;
 public interface Park  extends Serializable {
 
     /**
-     * Return park's id
-     * @return park's id
-     */
-	String getID();
-
-    /**
      * Returns true if the bike is in the park
      * @return true if the bike is in the park
      */

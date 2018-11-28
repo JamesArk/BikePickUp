@@ -1,0 +1,122 @@
+pickdown b1 p1 30
+
+listdelayed
+
+favoriteparks
+
+addpark p1 ola ola
+rua das moitas 156, SEIXAL
+
+ParkedBIKE b1 p1
+
+getparkinfo p1
+
+removebike p1
+
+parkedbike b1 p1
+
+REMOVEBIKE B1
+
+parkedbike b1 p1
+
+getparkINFO P1
+
+getuserinfo u1
+
+addbike b1 p1 13-xx-14
+
+pickdown b1 p1 23
+
+pickup b1 u1
+
+pickdown b1 p1 30
+
+pickdown b2 p1 29
+
+pickDOWN b1 p1 19
+
+pickup b1 u2
+
+PickUp b1 u1
+
+removeBike b1
+
+pickdown b1 p1 0
+
+pickdown b1 p1 60
+
+listdelayed
+
+favoriteparks
+
+removeBike b1
+
+bikePickUps b2
+
+userpickups b1
+
+bikepickups B1
+
+UserPickUps U1
+
+getuserinfo U1
+
+ChargeUser p1 10 
+
+chargeuser u1 0
+
+getuserinfo U1
+
+pickup b1 u3
+
+pickup b1 u1
+
+pickup b1 u1
+
+parkedBike b1 p1
+
+getParkInfo p1
+
+pickdown b1 p2 30
+
+pickdown b1 p1 21
+
+parkedbike b1 p1
+
+getuserinfo u1
+
+getparkinfo p1
+
+pickup b1 u1
+
+chargeuser u1 5
+
+pickup b1 u1
+
+pickdown b1 p1 20
+
+pickup b1 u1
+
+pickdown b1 p1 23
+
+pickup b1 u1
+
+pickdown b1 p1 40
+
+PickUp b1 u1
+
+bikepickups b1
+
+USERpickups u1
+
+parkedbike b1 p1
+
+getparkinfo p1
+
+getuserinfo u1
+
+listdelayed
+
+favoriteparks
+
+xs
