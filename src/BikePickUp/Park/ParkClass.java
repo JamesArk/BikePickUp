@@ -16,9 +16,9 @@ public class ParkClass implements ParkSet {
 	private static final long serialVersionUID = 0L;
 
     /**
-     * Park identification, Park name, Park address.
+     * Park name, Park address.
      */
-	private String parkID,name,address;
+	private String name,address;
 
     /**
      * Total number of pickups were made from this park.
@@ -31,23 +31,16 @@ public class ParkClass implements ParkSet {
 	private Dictionary<String,Bike> bikes;
 
     /**
-     *
-     * @param parkID Park identification
-     * @param name Park name
+     *  @param name Park name
      * @param address Park address.
-     */
-    public ParkClass(String parkID, String name, String address) {
-        this.parkID = parkID;
+	 */
+    public ParkClass(String name, String address) {
         this.name = name;
         this.address = address;
         nPickUps = 0;
         bikes = new ChainedHashTable<>();
     }
 
-	@Override
-	public String getID() {
-		return parkID;
-	}
 
 	@Override
 	public void addBike(Bike b) {
